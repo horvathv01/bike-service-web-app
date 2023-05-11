@@ -6,7 +6,7 @@ export default function WelcomeMessage(){
        
     
     useEffect(() => {
-        fetch("https://localhost:7091/LandingPage")
+        fetch("https://localhost:44333/Greeting")
         .then(response => response.text())
         .then(data => {
             setGreeting(data)
