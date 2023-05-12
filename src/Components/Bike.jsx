@@ -9,7 +9,7 @@ export function Bike(){
     const [bikeData, setBikeData] = useState(trialBike);
 
     useEffect(() => {
-        fetch("https://localhost:7091/Bike/allBike")
+        fetch("https://localhost:44333/Bike/allBikes")
         .then(data => data.json())
         .then(info => {
             setBikeData(info[0])
