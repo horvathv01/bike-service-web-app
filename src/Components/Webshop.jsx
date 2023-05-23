@@ -1,15 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import BasicExample from './Navbar';
 import { Link } from 'react-router-dom';
 
 
 
-export default function Webshop(){
+export default function Webshop({Header}){
     
 
     return(
         <div>
-        <div><BasicExample/></div>               
+        <div><Header/></div>               
         <h1>BikeService Webshop</h1>
         <p>Select product type</p>
         <Link to={"/webshop/bikes"}><button>Bikes</button></Link>

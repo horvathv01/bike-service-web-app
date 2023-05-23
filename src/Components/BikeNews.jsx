@@ -1,9 +1,9 @@
-import BasicExample from './Navbar';
 
-export function BikeNews(){
+
+export default function BikeNews({Header}){
     return (
     <div>
-        <div><BasicExample/></div>        
+        <div><Header/></div>        
         <p>Bike News</p>
     </div>
     );
