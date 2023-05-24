@@ -11,6 +11,7 @@ import Tours from './Components/Tours';
 import Service from './Components/Service';
 import BikeForm from './Components/BikeForm'
 import './App.css';
+import '@progress/kendo-theme-default/dist/all.css';
 
 function App() {
   return (

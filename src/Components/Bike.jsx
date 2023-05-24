@@ -8,7 +8,7 @@ export function Bike({Header}){
     const [bikeData, setBikeData] = useState(trialBike);
 
     useEffect(() => {
-        fetch("https://localhost:5136/Bike/allBikes")
+        fetch("http://localhost:5136/bike")
         .then(data => data.json())
         .then(info => {
             setBikeData(info[0])
@@ -20,12 +20,7 @@ export function Bike({Header}){
             <div><Header/></div>     
             <h1>Bike info</h1>
             <p>{bikeData.manufacturer}</p>
-            <p>{bikeData.model}</p>
-            <p>{bikeData.type}</p>
-            <p>{bikeData.wheelSize}</p>
-            <p>{bikeData.frameSize}</p>
-            <p>{bikeData.state}</p>
-            <p>{bikeData.insured}</p>
+
         </div>
     );
 
