@@ -27,6 +27,10 @@ function App() {
         <Route path="/news" element={<BikeNews Header={Header}/>}/>
         <Route path="/insurance" element={<Insurance Header={Header}/>}/>
         <Route path="/profile" element={<Profile Header={Header}/>}/>
+        <Route path="/profile/bikes" element={<Profile Header={Header}/>}/>
+        <Route path="/profile/tours" element={<Profile Header={Header}/>}/>
+        <Route path="/profile/appointments" element={<Profile Header={Header}/>}/>
+        <Route path="/logout" element={<LandingPage Header={Header}/>}/>
         <Route path="/cart" element={<ShoppingCart Header={Header}/>}/>
         <Route path="/tours" element={<Tours Header={Header}/>}/>
         <Route path="/service" element={<Service Header={Header}/>}/>
