@@ -1,9 +1,9 @@
-import BasicExample from './Navbar';
 
-export function Insurance(){
+
+export default function Insurance({Header}){
     return (
     <div>
-        <div><BasicExample/></div>        
+        <div><Header/></div>        
         <p>Insurance</p>
     </div>
     );

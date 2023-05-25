@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import BasicExample from './Navbar';
 import { Link } from 'react-router-dom';
 
-export function Bike(){
+export function Bike({Header}){
 
     let trialBike = {};
 
     const [bikeData, setBikeData] = useState(trialBike);
 
     useEffect(() => {
-        fetch("https://localhost:44333/Bike/allBikes")
+        fetch("https://localhost:5136/Bike/allBikes")
         .then(data => data.json())
         .then(info => {
             setBikeData(info[0])
@@ -18,7 +17,7 @@ export function Bike(){
 
     return (
         <div>
-            <div><BasicExample/></div>     
+            <div><Header/></div>     
             <h1>Bike info</h1>
             <p>{bikeData.manufacturer}</p>
             <p>{bikeData.model}</p>
@@ -32,23 +31,23 @@ export function Bike(){
 
 }
 
-export function ChooseNewOrUsed(){
+export function ChooseNewOrUsed({Header}){
   return (
-  <div>
-  <div><BasicExample/></div>      
-  <Link to={"/webshop/bikes/new"}><button>New bikes</button></Link>
-  <Link to={"/webshop/bikes/used"}><button>Used bikes</button></Link>
-  </div>
+    <div>
+    <div><Header/></div>      
+    <Link to={"/webshop/bikes/new"}><button>New bikes</button></Link>
+    <Link to={"/webshop/bikes/used"}><button>Used bikes</button></Link>
+    </div>
   );
 }
 
-export function NewBike(){
+export function NewBike({Header}){
   return (
     <div>
-    <div><BasicExample/></div>      
+    <div><Header/></div>      
     <p>New bikes</p>
     </div>
-    );
+  );
 }
 
 

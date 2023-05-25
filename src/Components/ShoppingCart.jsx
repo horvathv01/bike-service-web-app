@@ -1,9 +1,9 @@
-import BasicExample from './Navbar';
 
-export function ShoppingCart(){
+
+export default function ShoppingCart({Header}){
     return (
     <div>
-        <div><BasicExample/></div>        
+        <div><Header/></div>        
         <p>Shopping Cart</p>
     </div>
     );

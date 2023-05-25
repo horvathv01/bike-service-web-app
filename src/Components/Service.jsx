@@ -1,10 +1,10 @@
-import BasicExample from './Navbar';
 
-export function Service(){
+
+export default function Service({Header}){
 
     return (
         <div>
-            <div><BasicExample/></div>        
+            <div><Header/></div>        
             <p>Bike Service</p>
         </div>
     );

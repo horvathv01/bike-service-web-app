@@ -1,9 +1,13 @@
+import { useState } from 'react';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 
-function BasicExample() {
+function Header() {
+
+const [user, setUser] = useState(null);
+
   return (
     <Navbar bg="light" expand="lg">
       <Container>
@@ -17,14 +21,14 @@ function BasicExample() {
           <Nav.Link href="/insurance">Insurance</Nav.Link>
           <Nav.Link href="/news">Bike News</Nav.Link>
           <Nav.Link href="/cart">Shopping Cart</Nav.Link>
-          <Nav.Link href="/profile">Profile</Nav.Link>
-          <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-            <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-            <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
-            <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
+          <NavDropdown title="Profile" id="basic-nav-dropdown">
+            <NavDropdown.Item href="/profile">My Profile</NavDropdown.Item>
+            <NavDropdown.Item href="/profile/bikes">My Bikes</NavDropdown.Item>
+            <NavDropdown.Item href="/profile/tours">My Tours</NavDropdown.Item>
+            <NavDropdown.Item href="/profile/appointments">My Appointments</NavDropdown.Item>
             <NavDropdown.Divider />
-            <NavDropdown.Item href="#action/3.4">
-              Separated link
+            <NavDropdown.Item href="/logout">
+              Logout
             </NavDropdown.Item>
           </NavDropdown>
         </Nav>
@@ -34,5 +38,5 @@ function BasicExample() {
   );
 }
 
-export default BasicExample;
+export default Header;
 

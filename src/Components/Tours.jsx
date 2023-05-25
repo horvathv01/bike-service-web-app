@@ -1,9 +1,9 @@
-import BasicExample from './Navbar';
 
-export function Tours(){
+
+export default function Tours({Header}){
     return (
     <div>
-        <div><BasicExample/></div>        
+        <div><Header/></div>        
         <p>Tours</p>
     </div>
     );
