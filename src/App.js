@@ -11,6 +11,7 @@ import Tours from './Components/Tours';
 import Service from './Components/Service';
 import BikeForm from './Components/BikeForm'
 import serverConnection from './Components/ServerConnection';
+import BikeListDisplay from './Components/BikeListDisplay';
 import './App.css';
 
 function App() {
@@ -20,7 +21,7 @@ function App() {
         <Route path="/" element={<LandingPage Header={Header} serverConnection={serverConnection}/>}/>
         <Route path="/webshop/bikes" element={<ChooseNewOrUsed Header={Header}/>}/>
         <Route path="/webshop/bikes/new" element={<NewBike Header={Header}/>}/>
-        <Route path="/webshop/bikes/used" element={<Bike Header={Header}/>}/>
+        <Route path="/webshop/bikes/used" element={<Bike Header={Header} BikeListDisplay={BikeListDisplay}/>}/>
         <Route path="/webshop" element={<Webshop Header={Header}/>}/>
         <Route path="/webshop/parts" element={<Webshop Header={Header}/>}/>
         <Route path="/webshop/tools" element={<Webshop Header={Header}/>}/>
