@@ -1,29 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-export function Bike({Header}){
+export function Bike({Header, BikeListDisplay}){
 
     let trialBike = {};
 
     const [bikeData, setBikeData] = useState(trialBike);
 
-    useEffect(() => {
-        fetch("http://localhost:5136/bike")
-        .then(data => data.json())
-        .then(info => {
-            setBikeData(info[0])
-        })
-    }, []);
-
-    return (
-        <div>
-            <div><Header/></div>     
-            <h1>Bike info</h1>
-            <p>{bikeData.manufacturer}</p>
-
-        </div>
+    return(
+      <div>
+        <div><Header/></div>     
+        <div><BikeListDisplay /></div>
+      </div>
     );
-
 }
 
 export function ChooseNewOrUsed({Header}){
@@ -44,5 +33,3 @@ export function NewBike({Header}){
     </div>
   );
 }
-
-

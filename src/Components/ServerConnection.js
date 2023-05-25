@@ -76,7 +76,7 @@ return urlsAndObjects;
 }
 
 //call this like: 
-ReturnAllFetchData(body).login.url;
+// ReturnAllFetchData(body).login.url;
 
-fetch(ReturnAllFetchData(body).login.url, ReturnAllFetchData(body).login.body)
-.then()
+// fetch(ReturnAllFetchData(body).login.url, ReturnAllFetchData(body).login.body)
+// .then()
