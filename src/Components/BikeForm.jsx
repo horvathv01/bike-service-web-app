@@ -4,7 +4,6 @@ import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
-import Error from './Error';
 
 function BikeForm({ Header }) {
   const navigate = useNavigate();
@@ -107,7 +106,7 @@ function BikeForm({ Header }) {
             >
               <option value="">Choose...</option>
               <option value="RoadBike">RoadBike</option>
-              <option value="Mountain">Mountain</option>
+              <option value="MountainBike">MountainBike</option>
               <option value="TrekkingBike">TrekkingBike</option>
               <option value="CityBike">CityBike</option>
               <option value="BMX">BMX</option>
