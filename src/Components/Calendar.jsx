@@ -5,13 +5,6 @@ import { Calendar } from "@progress/kendo-react-dateinputs";
 import { useEffect, useRef, useState } from "react";
 
 const times = [
-/*   "08:00 - 10:00",
-  "10:00 - 12:00",
-  "12:00 - 14:00",
-  "14:00 - 16:00",
-  "16:00 - 18:00",
-  "18:00 - 20:00", */
-
   "09:00 - 10:00",
   "10:00 - 11:00",
   "11:00 - 12:00",
@@ -19,39 +12,6 @@ const times = [
   "14:00 - 15:00",
   "15:00 - 16:00",
 ];
-
-/* const getRandomNumInRange = (min, max) => {
-  return Math.floor(Math.random() * (max - min) + min);
-};
-
-
-const pickSlotTimes = times => {
-  // Get a random number that will indicate how many time slots we pick
-  const timesToPick = getRandomNumInRange(0, times.length);
-
-  // If the random picked is the maximum possible then return all times
-  if (timesToPick === times.length - 1) {
-    return times;
-  }
-
-  let timesPicked = [];
-
-  // Loop until we have picked specified number of times
-  while (timesToPick !== timesPicked.length - 1) {
-    // Get a new index and time
-    const index = getRandomNumInRange(0, times.length);
-    const selectedTime = times[index];
-    // If we already picked that time we continue
-    // as we don't want duplicated
-    if (timesPicked.includes(selectedTime)) continue;
-    // Keep the time
-    timesPicked.push(selectedTime);
-  }
-
-  // We need to sort the times, as they may not be in a correct order
-  return timesPicked.sort();
-}; */
-
 
 function BookSlot(props) {
   const [bookingDate, setBookingDate] = useState(null);
@@ -80,7 +40,7 @@ function BookSlot(props) {
   }, [bookingDate]);
 
   const onDateChange = e => {
-    setSelectedTimeSlot(null);
+    //setSelectedTimeSlot(null);
     setBookingDate(e.value);
   };
 
@@ -100,8 +60,7 @@ function BookSlot(props) {
                 onClick={e => {
                   e.preventDefault()
                   setSelectedTimeSlot(time)
-                  //props.buttonText = props.setButtonText(`${bookingDate.toDateString()} at ${selectedTimeSlot}`)
-                  props.buttonText = `${bookingDate.toDateString()} at ${selectedTimeSlot}`;
+                  props.setPreButtonText(`${bookingDate.toDateString()} at ${time}`);
                 }}
               >
                 {time}
