@@ -10,13 +10,14 @@ import ShoppingCart from './Components/ShoppingCart';
 import Tours from './Components/Tours';
 import Service from './Components/Service';
 import BikeForm from './Components/BikeForm'
+import serverConnection from './Components/ServerConnection';
 import './App.css';
 
 function App() {
   return (
     <div>
       <Routes>
-        <Route path="/" element={<LandingPage Header={Header}/>}/>
+        <Route path="/" element={<LandingPage Header={Header} serverConnection={serverConnection}/>}/>
         <Route path="/webshop/bikes" element={<ChooseNewOrUsed Header={Header}/>}/>
         <Route path="/webshop/bikes/new" element={<NewBike Header={Header}/>}/>
         <Route path="/webshop/bikes/used" element={<Bike Header={Header}/>}/>

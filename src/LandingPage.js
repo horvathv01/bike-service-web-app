@@ -3,45 +3,76 @@ import {useNavigate} from 'react-router-dom';
 
 
 
-export default function WelcomeMessage({Header}){
+export default function WelcomeMessage({Header, serverConnection}){
     const [greeting, setGreeting] = useState('');
     const [userName, setUserName] = useState("");
     const [password, setPassword] = useState("");
     const [user, setUser] = useState(null);
     const navigate = useNavigate();
     
-       
-
 
     useEffect(() => {
-        fetch("http://localhost:5136/Greeting")
-        .then(response => response.text())
-        .then(data => {
-            setGreeting(data)
-          })
+      async function fetchData(){
+      let result = await serverConnection(null, "get", "http://localhost:5136/Greeting")
+      setGreeting(result);
+      }
+      fetchData();
     }, []);
 
 
-  function Login(){
-      fetch("http://localhost:5136/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({userName, password})
-      })
-      .then(response => response.json())
-      .then(data => {
-        if(data.status.ToLowerCase === "ok"){
-          setUser(data.user.Id);
-          navigate("/webshop");
-        } else {
-          setUserName("");
-          setPassword("");
-          window.alert("Invalid username or password!");
-        }
-      })
-    }
+function Login(){
+
+    fetch("http://localhost:5136/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({userName, password})
+    })
+    .then(response => response.json())
+    .then(data => {
+      if(data.status.ToLowerCase === "ok"){
+        setUser(data.user.Id);
+        navigate("/webshop");
+      } else {
+        setUserName("");
+        setPassword("");
+        window.alert("Invalid username or password!");
+      }
+    })
+  }
+       
+
+
+  //   useEffect(() => {
+  //       fetch("http://localhost:5136/Greeting")
+  //       .then(response => response.text())
+  //       .then(data => {
+  //           setGreeting(data)
+  //         })
+  //   }, []);
+
+
+  // function Login(){
+  //     fetch("http://localhost:5136/login", {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json"
+  //       },
+  //       body: JSON.stringify({userName, password})
+  //     })
+  //     .then(response => response.json())
+  //     .then(data => {
+  //       if(data.status.ToLowerCase === "ok"){
+  //         setUser(data.user.Id);
+  //         navigate("/webshop");
+  //       } else {
+  //         setUserName("");
+  //         setPassword("");
+  //         window.alert("Invalid username or password!");
+  //       }
+  //     })
+  //   }
 
     return (
       <div>
