@@ -1,92 +1,195 @@
-
+import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
+import Error from './Error';
 
-function BikeForm({Header}) {
-  return (<div>
-    <div><Header/></div>     
-    <Form>
+function BikeForm({ Header }) {
+  const navigate = useNavigate();
+  const [error, setError] = useState(null);
+  const [bike, setBike] = useState({
+    VIN: '',
+    Manufacturer: '',
+    Model: '',
+    BikeType: '',
+    WheelSize: 0,
+    FrameSize: '',
+    State: '',
+    UserId: 0,
+    Insured: false,
+    ServiceHistory: []
+  });
 
-      <Row className="mb-3">
-        <Form.Group as={Col} controlId="formGridEmail">
-          <Form.Label>Email</Form.Label>
-          <Form.Control type="email" placeholder="Enter email" />
-        </Form.Group>
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    const newValue = name === 'WheelSize' || name === 'UserId' ? parseInt(value, 10) : value;
+    setBike((prevBike) => ({ ...prevBike, [name]: newValue }));
+  };
 
-        <Form.Group as={Col} controlId="formGridPassword">
-          <Form.Label>Password</Form.Label>
-          <Form.Control type="password" placeholder="Password" />
-        </Form.Group>
-      </Row>
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch('http://localhost:5136/bike', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(bike)
+      });
 
-      <Form.Group className="mb-3" controlId="formGridAddress1">
-        <Form.Label>Address</Form.Label>
-        <Form.Control placeholder="1234 Main St" />
-      </Form.Group>
+      if (response.ok) {
+        console.log('Bike saved successfully!');
+        navigate('/success', { state: { message: 'Bike saved successfully!' } });
+      } else {
+        console.log('Failed to save bike.');
+        setError('Failed to save bike. Please try again.');
+        navigate('/error', { state: { message: 'Failed to save bike. Please try again.' } });
+      }
+    } catch (error) {
+      console.log('An error occurred:', error);
+      setError('An error occurred. Please try again.', { state: { message: 'An error occurred. Please try again.' } });
+      navigate('/error');
+    }
+    console.log(JSON.stringify(bike));
+  };
 
-      <Form.Group className="mb-3" controlId="formGridAddress2">
-        <Form.Label>Address 2</Form.Label>
-        <Form.Control placeholder="Apartment, studio, or floor" />
-      </Form.Group>
+  return (
+    <div>
+      <div>
+        <Header />
+      </div>
+      <Form onSubmit={handleSubmit}>
+        <Row className="mb-3">
+          <Form.Group as={Col} controlId="formGridVIN">
+            <Form.Label>VIN</Form.Label>
+            <Form.Control
+              type="text"
+              name="VIN"
+              value={bike.VIN}
+              onChange={handleChange}
+              placeholder="Enter VIN"
+            />
+          </Form.Group>
 
-      <Row className="mb-3">
-        <Form.Group as={Col} controlId="formGridCity">
-          <Form.Label>City</Form.Label>
-          <Form.Control />
-        </Form.Group>
+          <Form.Group as={Col} controlId="formGridManufacturer">
+            <Form.Label>Manufacturer</Form.Label>
+            <Form.Control
+              type="text"
+              name="Manufacturer"
+              value={bike.Manufacturer}
+              onChange={handleChange}
+              placeholder="Enter manufacturer"
+            />
+          </Form.Group>
 
-        <Form.Group as={Col} controlId="formGridState">
+          <Form.Group as={Col} controlId="formGridModel">
+            <Form.Label>Model</Form.Label>
+            <Form.Control
+              type="text"
+              name="Model"
+              value={bike.Model}
+              onChange={handleChange}
+              placeholder="Enter model"
+            />
+          </Form.Group>
+        </Row>
+
+        <Row className="mb-3">
+          <Form.Group as={Col} controlId="formGridBikeType">
+            <Form.Label>Bike Type</Form.Label>
+            <Form.Control
+              as="select"
+              name="BikeType"
+              value={bike.BikeType}
+              onChange={handleChange}
+            >
+              <option value="">Choose...</option>
+              <option value="RoadBike">RoadBike</option>
+              <option value="Mountain">Mountain</option>
+              <option value="TrekkingBike">TrekkingBike</option>
+              <option value="CityBike">CityBike</option>
+              <option value="BMX">BMX</option>
+              <option value="CrossTrekkingBike">CrossTrekkingBike</option>
+              <option value="ElectricBike">ElectricBike</option>
+              <option value="FixieBike">FixieBike</option>
+            </Form.Control>
+          </Form.Group>
+
+          <Form.Group as={Col} controlId="formGridWheelSize">
+            <Form.Label>Wheel Size</Form.Label>
+            <Form.Control
+              type="number"
+              name="WheelSize"
+              value={bike.WheelSize}
+              onChange={handleChange}
+              placeholder="Enter wheel size"
+            />
+          </Form.Group>
+
+          <Form.Group as={Col} controlId="formGridFrameSize">
+            <Form.Label>Frame Size</Form.Label>
+            <Form.Control
+              as="select"
+              name="FrameSize"
+              value={bike.FrameSize}
+              onChange={handleChange}
+            >
+              <option value="">Choose...</option>
+              <option value="S">Small</option>
+              <option value="M">Medium</option>
+              <option value="L">Large</option>
+              <option value="XL">Extra Large</option>
+            </Form.Control>
+          </Form.Group>
+        </Row>
+
+        <Form.Group className="mb-3" controlId="formGridState">
           <Form.Label>State</Form.Label>
-          <Form.Select defaultValue="Choose...">
-            <option>Choose...</option>
-            <option>...</option>
-          </Form.Select>
+          <Form.Check
+            type="radio"
+            name="State"
+            label="New"
+            value="New"
+            checked={bike.State === "New"}
+            onChange={handleChange}
+          />
+          <Form.Check
+            type="radio"
+            name="State"
+            label="Used"
+            value="Used"
+            checked={bike.State === "Used"}
+            onChange={handleChange}
+          />
         </Form.Group>
 
-        <Form.Group as={Col} controlId="formGridZip">
-          <Form.Label>Zip</Form.Label>
-          <Form.Control />
+        <Form.Group className="mb-3" controlId="formGridUserId">
+          <Form.Label>User ID</Form.Label>
+          <Form.Control
+            type="number"
+            name="UserId"
+            value={bike.UserId}
+            onChange={handleChange}
+            placeholder="Enter user ID"
+          />
         </Form.Group>
-      </Row>
 
-      <fieldset>
-        <Form.Group as={Row} className="mb-3">
-          <Form.Label as="legend" column sm={2}>
-            Radios
-          </Form.Label>
-          <Col sm={10}>
-            <Form.Check
-              type="radio"
-              label="first radio"
-              name="formHorizontalRadios"
-              id="formHorizontalRadios1"
-            />
-            <Form.Check
-              type="radio"
-              label="second radio"
-              name="formHorizontalRadios"
-              id="formHorizontalRadios2"
-            />
-            <Form.Check
-              type="radio"
-              label="third radio"
-              name="formHorizontalRadios"
-              id="formHorizontalRadios3"
-            />
-          </Col>
+        <Form.Group className="mb-3" controlId="formGridInsured">
+          <Form.Check
+            type="checkbox"
+            name="Insured"
+            checked={bike.Insured}
+            onChange={(e) => setBike((prevBike) => ({ ...prevBike, Insured: e.target.checked }))}
+            label="Insured"
+          />
         </Form.Group>
-      </fieldset>
 
-      <Form.Group className="mb-3" id="formGridCheckbox">
-        <Form.Check type="checkbox" label="Check me out" />
-      </Form.Group>
-
-      <Button variant="primary" type="submit">
-        Submit
-      </Button>
-    </Form>
+        <Button variant="primary" type="submit">
+          Submit
+        </Button>
+      </Form>
     </div>
   );
 }
