@@ -1,5 +1,5 @@
 import BookSlot from "./Calendar";
-import React from 'react';
+import React, { useState } from 'react';
 
 import { format } from 'date-fns';
 import { DayPicker } from 'react-day-picker';
@@ -9,6 +9,7 @@ import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
+import Modal from 'react-bootstrap/Modal';
 
 function Example() {
   const [selected, setSelected] = React.useState();
@@ -27,6 +28,49 @@ function Example() {
   );
 }
 
+
+
+function ModalExample() {
+  const [show, setShow] = useState(false);
+  const [buttonText, setButtonText] = useState("Click for selecting slot");
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  return (
+    <>
+      <Button variant="primary" onClick={handleShow}>
+        {buttonText}
+      </Button>
+
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Modal heading</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Woohoo, you're reading this text in a modal!
+          <BookSlot setButtonText = {setButtonText} buttonText = {buttonText}/>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={
+            handleClose
+            //setButtonText("New text");
+          
+            
+            }>
+            Save Changes
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    </>
+  );
+}
+
+
+
+
 function GridComplexExample() {
   return (
     <Form>
@@ -35,7 +79,9 @@ function GridComplexExample() {
           <Form.Label>Select bike</Form.Label>
           <Form.Select defaultValue="Choose...">
             <option>Choose...</option>
-            <option>...</option>
+            <option>Gepida Alboin 500crs</option>
+            <option>CUBE Aim Pro 29" MTB</option>
+            <option>Kross Hexagon 3.0 blue grey 2022</option>
           </Form.Select>
         </Form.Group>
 
@@ -43,7 +89,9 @@ function GridComplexExample() {
           <Form.Label>Select service</Form.Label>
           <Form.Select defaultValue="Choose...">
             <option>Choose...</option>
-            <option>...</option>
+            <option>Centering</option>
+            <option>Inner tube replacement</option>
+            <option>General Servic</option>
           </Form.Select>
         </Form.Group>
 
@@ -51,7 +99,9 @@ function GridComplexExample() {
 
         <Form.Group as={Col} /* controlId="formGridPassword" */>
           <Form.Label>Select slot</Form.Label>
-          <Example/>
+          {/* <BookSlot/> */}
+          <Form.Label><ModalExample/></Form.Label>
+          
           {/* <Form.Control type="password" placeholder="Password" /> */}
         </Form.Group>
       </Row>
@@ -86,9 +136,9 @@ function GridComplexExample() {
         </Form.Group>
       </Row> */}
 
-      <Form.Group className="mb-3" id="formGridCheckbox">
+      {/* <Form.Group className="mb-3" id="formGridCheckbox">
         <Form.Check type="checkbox" label="Check me out" />
-      </Form.Group>
+      </Form.Group> */}
 
       <Button variant="primary" type="submit">
         Submit

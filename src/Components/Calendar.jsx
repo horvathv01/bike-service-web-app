@@ -53,7 +53,7 @@ const pickSlotTimes = times => {
 }; */
 
 
-const BookSlot = props => {
+function BookSlot(props) {
   const [bookingDate, setBookingDate] = useState(null);
   const [selectedTimeSlot, setSelectedTimeSlot] = useState(null);
   const [bookingTimes, setBookingTimes] = useState([]);
@@ -94,9 +94,15 @@ const BookSlot = props => {
           {bookingTimes.map(time => {
             return (
               <button
+                
                 key={time}
                 className="k-button k-mb-4"
-                onClick={e => setSelectedTimeSlot(time)}
+                onClick={e => {
+                  e.preventDefault()
+                  setSelectedTimeSlot(time)
+                  //props.buttonText = props.setButtonText(`${bookingDate.toDateString()} at ${selectedTimeSlot}`)
+                  props.buttonText = `${bookingDate.toDateString()} at ${selectedTimeSlot}`;
+                }}
               >
                 {time}
               </button>
