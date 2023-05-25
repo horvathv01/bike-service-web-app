@@ -7,36 +7,12 @@ export function Bike({Header, BikeListDisplay}){
 
     const [bikeData, setBikeData] = useState(trialBike);
 
-
     return(
       <div>
         <div><Header/></div>     
         <div><BikeListDisplay /></div>
       </div>
     );
-
-    // useEffect(() => {
-    //     fetch("https://localhost:5136/Bike/allBikes")
-    //     .then(data => data.json())
-    //     .then(info => {
-    //         setBikeData(info[0])
-    //     })
-    // }, []);
-
-    // return (
-    //     <div>
-    //         <div><Header/></div>     
-    //         <h1>Bike info</h1>
-    //         <p>{bikeData.manufacturer}</p>
-    //         <p>{bikeData.model}</p>
-    //         <p>{bikeData.type}</p>
-    //         <p>{bikeData.wheelSize}</p>
-    //         <p>{bikeData.frameSize}</p>
-    //         <p>{bikeData.state}</p>
-    //         <p>{bikeData.insured}</p>
-    //     </div>
-    // );
-
 }
 
 export function ChooseNewOrUsed({Header}){
@@ -57,5 +33,3 @@ export function NewBike({Header}){
     </div>
   );
 }
-
-

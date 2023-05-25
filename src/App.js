@@ -13,6 +13,7 @@ import BikeForm from './Components/BikeForm'
 import serverConnection from './Components/ServerConnection';
 import BikeListDisplay from './Components/BikeListDisplay';
 import './App.css';
+import '@progress/kendo-theme-default/dist/all.css';
 
 function App() {
   return (
