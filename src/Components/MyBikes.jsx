@@ -1,6 +1,6 @@
 import Header from "./Header";
 import ProfileNavbar from "./ProfileNavBar";
-import BikeListDisplay from "./BikeListDisplay";
+import BikeDisplay from "./Bike/BikeDisplay";
 
 export default function MyBikes() {
 
@@ -8,7 +8,7 @@ export default function MyBikes() {
         <div>
             <div><Header /></div>
             <div><ProfileNavbar /></div>
-            <div><BikeListDisplay /></div>
+            <div><BikeDisplay /></div>
         </div>
     );
 }
