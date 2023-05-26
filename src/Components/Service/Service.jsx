@@ -1,4 +1,4 @@
-import BookSlot from "./Calendar";
+import BookSlot from "../Calendar";
 import React, { useState } from 'react';
 
 import { format } from 'date-fns';

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-export default function BikeListDisplay() {
+export default function BikeDisplay() {
     const navigate = useNavigate();
   const [bikeList, setBikeList] = useState([]);
   const [error,setError] = useState(null);
@@ -10,13 +10,13 @@ export default function BikeListDisplay() {
     fetch("http://localhost:5136/bike")
       .then(response => response.json())
       .then(data => setBikeList(data))
-      .catch(error => {
-        console.log('An error occurred:', error);
+      .catch(err => {
+        console.log('An error occurred:', err);
         setError('Failed to get bikes. Please try again.');
-        navigate('/error', { state: { message: 'Failed to get bikes. Please try again.' } });
+        navigate('/error', { state: { message: error} });
       });
       
-  }, []);
+  }, [navigate,error]);
   console.log(bikeList[6]);
 
   function listToElements() {
