@@ -1,11 +1,8 @@
 import { Routes, Route } from 'react-router-dom';
-import serverConnection from './Components/ServerConnection';
-import Header from './Components/PageComponents/Header';
 import LandingPage from './LandingPage';
 import Profile from './Components/Profile/Profile';
 import { Bike, ChooseNewOrUsed, NewBike } from './Components/Bike/Bike';
 import MyBikes from './Components/Bike/MyBikes';
-import BikeDisplay from './Components/Bike/BikeDisplay';
 import BikeForm from './Components/Bike/BikeForm'
 import News from './Components/PageComponents/News';
 import Service from './Components/Service/Service';
@@ -22,25 +19,25 @@ function App() {
   return (
     <div>
       <Routes>
-        <Route path="/" element={<LandingPage Header={Header} serverConnection={serverConnection} />} />
-        <Route path="/news" element={<News Header={Header} />} />
-        <Route path="/logout" element={<LandingPage Header={Header} />} />
-        <Route path="/insurance" element={<Insurance Header={Header} />} />
-        <Route path="/tours" element={<Tours Header={Header} />} />
-        <Route path="/service" element={<Service Header={Header} />} />
-        <Route path="/profile" element={<Profile Header={Header} />} />
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/news" element={<News />} />
+        <Route path="/logout" element={<LandingPage />} />
+        <Route path="/insurance" element={<Insurance />} />
+        <Route path="/tours" element={<Tours />} />
+        <Route path="/service" element={<Service />} />
+        <Route path="/profile" element={<Profile />} />
         <Route path="/profile/bikes" element={<MyBikes />} />
-        <Route path="/profile/bike-form" element={<BikeForm Header={Header} />} />
-        <Route path="/profile/appointments" element={<Profile Header={Header} />} />
-        <Route path="/profile/tours" element={<Profile Header={Header} />} />
-        <Route path="/webshop/bikes" element={<ChooseNewOrUsed Header={Header} />} />
-        <Route path="/webshop/bikes/new" element={<NewBike Header={Header} />} />
-        <Route path="/webshop/bikes/used" element={<Bike Header={Header} BikeListDisplay={BikeDisplay} />} />
-        <Route path="/webshop" element={<Webshop Header={Header} />} />
-        <Route path="/webshop/parts" element={<Webshop Header={Header} />} />
-        <Route path="/webshop/tools" element={<Webshop Header={Header} />} />
-        <Route path="/webshop/accessories" element={<Webshop Header={Header} />} />
-        <Route path="/webshop/cart" element={<ShoppingCart Header={Header} />} />
+        <Route path="/profile/bike-form" element={<BikeForm />} />
+        <Route path="/profile/appointments" element={<Profile />} />
+        <Route path="/profile/tours" element={<Tours />} />
+        <Route path="/webshop/bikes" element={<ChooseNewOrUsed />} />
+        <Route path="/webshop/bikes/new" element={<NewBike />} />
+        <Route path="/webshop/bikes/used" element={<Bike />} />
+        <Route path="/webshop" element={<Webshop />} />
+        <Route path="/webshop/parts" element={<Webshop />} />
+        <Route path="/webshop/tools" element={<Webshop />} />
+        <Route path="/webshop/accessories" element={<Webshop />} />
+        <Route path="/webshop/cart" element={<ShoppingCart />} />
         <Route path="/*" element={<Error message="Page not found" />} />
         <Route path="/error" element={<Error message="An error occurred. Please try again." />} />
         <Route path="/success" element={<Success />} />

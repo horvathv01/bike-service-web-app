@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
 import ProfileNavbar from './ProfileNavBar';
+import Header from '../PageComponents/Header';
+import { Container } from 'react-bootstrap';
 
-export default function Profile({ Header }) {
+export default function Profile() {
 
   return (
     <div>
@@ -9,9 +10,10 @@ export default function Profile({ Header }) {
       <div>
         <ProfileNavbar />
       </div>
-      <div>
-        Profile
-      </div>
+      <Container className="text-center mt-4">
+        <h1 className="text-primary fw-bold">Profile</h1>
+        <p className="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+      </Container>
     </div>
   );
 

@@ -1,35 +1,35 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import Header from '../PageComponents/Header';
+import BikeDisplay from './BikeDisplay';
 
-export function Bike({Header, BikeListDisplay}){
+export function Bike() {
 
-    let trialBike = {};
+  const [bikeData, setBikeData] = useState([]);
 
-    const [bikeData, setBikeData] = useState(trialBike);
-
-    return(
-      <div>
-        <div><Header/></div>     
-        <div><BikeListDisplay /></div>
-      </div>
-    );
-}
-
-export function ChooseNewOrUsed({Header}){
   return (
     <div>
-    <div><Header/></div>      
-    <Link to={"/webshop/bikes/new"}><button>New bikes</button></Link>
-    <Link to={"/webshop/bikes/used"}><button>Used bikes</button></Link>
+      <div><Header /></div>
+      <div><BikeDisplay /></div>
     </div>
   );
 }
 
-export function NewBike({Header}){
+export function ChooseNewOrUsed() {
   return (
     <div>
-    <div><Header/></div>      
-    <p>New bikes</p>
+      <div><Header /></div>
+      <Link to={"/webshop/bikes/new"}><button>New bikes</button></Link>
+      <Link to={"/webshop/bikes/used"}><button>Used bikes</button></Link>
+    </div>
+  );
+}
+
+export function NewBike() {
+  return (
+    <div>
+      <div><Header /></div>
+      <p>New bikes under construction</p>
     </div>
   );
 }

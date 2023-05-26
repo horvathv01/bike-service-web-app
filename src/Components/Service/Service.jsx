@@ -1,5 +1,6 @@
 import BookSlot from "./Calendar";
 import React, { useState } from 'react';
+import Header from '../PageComponents/Header';
 
 import { format } from 'date-fns';
 import { DayPicker } from 'react-day-picker';
@@ -47,20 +48,20 @@ function ModalExample() {
           <Modal.Title>Modal heading</Modal.Title>
         </Modal.Header>
         <Modal.Body>Woohoo, you're reading this text in a modal!
-          <BookSlot setPreButtonText = {setPreButtonText}/>
+          <BookSlot setPreButtonText={setPreButtonText} />
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
           <Button variant="primary" onClick={e => {
-              handleClose()
-              setButtonText(preButtonText);
+            handleClose()
+            setButtonText(preButtonText);
           }
-          
-          
-            
-            }>
+
+
+
+          }>
             Save Changes
           </Button>
         </Modal.Footer>
@@ -99,8 +100,8 @@ function GridComplexExample() {
         <Form.Group as={Col}>
           <Form.Label>Select slot</Form.Label>
           <br></br>
-          <Form.Label><ModalExample/></Form.Label>
-          
+          <Form.Label><ModalExample /></Form.Label>
+
         </Form.Group>
       </Row>
 
@@ -112,15 +113,15 @@ function GridComplexExample() {
 }
 
 
-export default function Service({Header}){
+export default function Service() {
 
-    return (
-        <div>
-            <div><Header/></div>        
-            <p>Bike Service</p>
-            <div>
-              <GridComplexExample/>
-            </div>
-        </div>
-    );
+  return (
+    <div>
+      <div><Header /></div>
+      <p>Bike Service</p>
+      <div>
+        <GridComplexExample />
+      </div>
+    </div>
+  );
 }
