@@ -1,5 +1,6 @@
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import Header from '../PageComponents/Header';
 
 const Success = () => {
   const location = useLocation();
@@ -8,7 +9,8 @@ const Success = () => {
 
   return (
     <div>
-      <h3>Success</h3>
+      <div><Header /></div>
+      <h2>Success</h2>
       {message && <p>{message}</p>}
       <button onClick={() => navigate(-1)}>Go Back</button>
     </div>

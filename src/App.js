@@ -21,23 +21,23 @@ function App() {
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/news" element={<News />} />
-        <Route path="/logout" element={<LandingPage />} />
-        <Route path="/insurance" element={<Insurance />} />
-        <Route path="/tours" element={<Tours />} />
         <Route path="/service" element={<Service />} />
+        <Route path="/tours" element={<Tours />} />
+        <Route path="/insurance" element={<Insurance />} />
+        <Route path="/cart" element={<ShoppingCart />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/profile/bikes" element={<MyBikes />} />
         <Route path="/profile/bike-form" element={<BikeForm />} />
-        <Route path="/profile/appointments" element={<Profile />} />
         <Route path="/profile/tours" element={<Tours />} />
+        <Route path="/profile/appointments" element={<Profile />} />
+        <Route path="/logout" element={<LandingPage />} />
+        <Route path="/webshop" element={<Webshop />} />
         <Route path="/webshop/bikes" element={<ChooseNewOrUsed />} />
         <Route path="/webshop/bikes/new" element={<NewBike />} />
         <Route path="/webshop/bikes/used" element={<Bike />} />
-        <Route path="/webshop" element={<Webshop />} />
         <Route path="/webshop/parts" element={<Webshop />} />
         <Route path="/webshop/tools" element={<Webshop />} />
         <Route path="/webshop/accessories" element={<Webshop />} />
-        <Route path="/webshop/cart" element={<ShoppingCart />} />
         <Route path="/*" element={<Error message="Page not found" />} />
         <Route path="/error" element={<Error message="An error occurred. Please try again." />} />
         <Route path="/success" element={<Success />} />
