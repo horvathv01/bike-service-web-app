@@ -1,20 +1,20 @@
 import { Routes, Route } from 'react-router-dom';
 import serverConnection from './Components/ServerConnection';
-import Header from './Components/Header';
+import Header from './Components/PageComponents/Header';
 import LandingPage from './LandingPage';
-import Profile from './Components/Profile';
+import Profile from './Components/Profile/Profile';
 import { Bike, ChooseNewOrUsed, NewBike } from './Components/Bike/Bike';
-import MyBikes from './Components/MyBikes';
+import MyBikes from './Components/Bike/MyBikes';
 import BikeDisplay from './Components/Bike/BikeDisplay';
 import BikeForm from './Components/Bike/BikeForm'
-import BikeNews from './Components/BikeNews';
+import News from './Components/PageComponents/News';
 import Service from './Components/Service/Service';
-import Insurance from './Components/Insurance';
+import Insurance from './Components/Bike/Insurance';
 import Tours from './Components/Tour/Tours';
 import Webshop from './Components/Webshop/Webshop';
 import ShoppingCart from './Components/Webshop/ShoppingCart';
-import Success from './Components/Success';
-import Error from './Components/Error';
+import Success from './Components/ActionResponse/Success';
+import Error from './Components/ActionResponse/Error';
 import './App.css';
 import '@progress/kendo-theme-default/dist/all.css';
 
@@ -23,7 +23,7 @@ function App() {
     <div>
       <Routes>
         <Route path="/" element={<LandingPage Header={Header} serverConnection={serverConnection} />} />
-        <Route path="/news" element={<BikeNews Header={Header} />} />
+        <Route path="/news" element={<News Header={Header} />} />
         <Route path="/logout" element={<LandingPage Header={Header} />} />
         <Route path="/insurance" element={<Insurance Header={Header} />} />
         <Route path="/tours" element={<Tours Header={Header} />} />

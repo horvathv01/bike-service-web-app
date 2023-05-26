@@ -1,6 +1,6 @@
 
 
-export default function BikeNews({Header}){
+export default function News({Header}){
     return (
     <div>
         <div><Header/></div>        

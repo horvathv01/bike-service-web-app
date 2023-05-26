@@ -1,6 +1,6 @@
-import Header from "./Header";
-import ProfileNavbar from "./ProfileNavBar";
-import BikeDisplay from "./Bike/BikeDisplay";
+import Header from "../PageComponents/Header";
+import ProfileNavbar from "../Profile/ProfileNavBar";
+import BikeDisplay from "./BikeDisplay";
 
 export default function MyBikes() {
 
