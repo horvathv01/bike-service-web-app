@@ -54,7 +54,7 @@ function BookSlot(props) {
           {bookingTimes.map(time => {
             return (
               <button
-                
+
                 key={time}
                 className="k-button k-mb-4"
                 onClick={e => {

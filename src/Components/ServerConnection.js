@@ -1,9 +1,9 @@
-export default function serverConnection(body, type, url) {
+export default function serverConnection(body, type, apiRoute) {
     const fetchObj = setFetch(body, type);
 
     return new Promise((resolve, reject) => {
       try {
-        fetch(url, fetchObj)
+        fetch(`http://localhost:5136/${apiRoute}`, fetchObj)
         .then(response => {
           const contentType = response.headers.get('Content-Type');
           if(contentType && contentType.includes('application/json')){
