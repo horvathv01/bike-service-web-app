@@ -14,6 +14,7 @@ import Service from './Components/Service';
 import BikeForm from './Components/BikeForm'
 import serverConnection from './Components/ServerConnection';
 import BikeListDisplay from './Components/BikeListDisplay';
+import MyBikes from './Components/MyBikes';
 import './App.css';
 import '@progress/kendo-theme-default/dist/all.css';
 
@@ -32,7 +33,7 @@ function App() {
         <Route path="/news" element={<BikeNews Header={Header} />} />
         <Route path="/insurance" element={<Insurance Header={Header} />} />
         <Route path="/profile" element={<Profile Header={Header} />} />
-        <Route path="/profile/bikes" element={<Profile Header={Header} />} />
+        <Route path="/profile/bikes" element={<MyBikes />}/>
         <Route path="/profile/tours" element={<Profile Header={Header} />} />
         <Route path="/profile/appointments" element={<Profile Header={Header} />} />
         <Route path="/logout" element={<LandingPage Header={Header} />} />
