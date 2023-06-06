@@ -93,7 +93,7 @@ function GridComplexExample() {
           <Form.Label>Select bike</Form.Label>
           <Form.Select defaultValue="Choose...">
 
-            <option>Choose...</option> {/*probably it should be removed */}
+            <option hidden>Choose...</option>
             {
               bikeList && bikeList.map(bike => ( // error: ach child in a list should have a unique "key" prop.
                 <option /*key={bike.id} href={`#action/${bike.id}`}*/> 
