@@ -1,11 +1,9 @@
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import Button from 'react-bootstrap/Button';
-import Col from 'react-bootstrap/Col';
-import Form from 'react-bootstrap/Form';
-import Row from 'react-bootstrap/Row';
+import { Button, Col, Form, Row} from 'react-bootstrap';
+import Header from '../PageComponents/Header';
 
-function BikeForm({ Header }) {
+function BikeForm() {
   const navigate = useNavigate();
   const [error, setError] = useState(null);
   const [bike, setBike] = useState({

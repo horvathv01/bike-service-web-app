@@ -1,24 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import {useNavigate} from 'react-router-dom';
+import Header from './Components/PageComponents/Header';
+import serverConnection from './Components/ServerConnection';
 
-
-
-export default function WelcomeMessage({Header, serverConnection}){
+export default function WelcomeMessage(){
     const [greeting, setGreeting] = useState('');
     const [userName, setUserName] = useState("");
     const [password, setPassword] = useState("");
-    const [user, setUser] = useState(null);
+    const [user, setUser] = useState([]);
     const navigate = useNavigate();
     
-
     useEffect(() => {
       async function fetchData(){
-      let result = await serverConnection(null, "get", "http://localhost:5136/Greeting")
+      let result = await serverConnection(null, "get", "Greeting")
       setGreeting(result);
       }
       fetchData();
     }, []);
-
 
 function Login(){
 
@@ -41,39 +39,7 @@ function Login(){
       }
     })
   }
-       
-
-
-  //   useEffect(() => {
-  //       fetch("http://localhost:5136/Greeting")
-  //       .then(response => response.text())
-  //       .then(data => {
-  //           setGreeting(data)
-  //         })
-  //   }, []);
-
-
-  // function Login(){
-  //     fetch("http://localhost:5136/login", {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json"
-  //       },
-  //       body: JSON.stringify({userName, password})
-  //     })
-  //     .then(response => response.json())
-  //     .then(data => {
-  //       if(data.status.ToLowerCase === "ok"){
-  //         setUser(data.user.Id);
-  //         navigate("/webshop");
-  //       } else {
-  //         setUserName("");
-  //         setPassword("");
-  //         window.alert("Invalid username or password!");
-  //       }
-  //     })
-  //   }
-
+  
     return (
       <div>
         <div><Header/></div>        

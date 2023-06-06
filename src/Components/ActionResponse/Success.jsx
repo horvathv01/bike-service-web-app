@@ -1,18 +1,20 @@
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import Header from '../PageComponents/Header';
 
-const Error = () => {
+const Success = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { message } = location.state || {};
 
   return (
     <div>
-      <h3>Error</h3>
+      <div><Header /></div>
+      <h2>Success</h2>
       {message && <p>{message}</p>}
       <button onClick={() => navigate(-1)}>Go Back</button>
     </div>
   );
 };
 
-export default Error;
+export default Success;
