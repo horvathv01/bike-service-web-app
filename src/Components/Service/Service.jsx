@@ -73,7 +73,7 @@ function ModalExample() {
 
 
 
-function GridComplexExample() {
+function ServiceForm(props) {
 
   const [bikeList, setBikeList] = useState(null);
 
@@ -91,9 +91,9 @@ function GridComplexExample() {
       <Row className="mb-3">
         <Form.Group as={Col} controlId="formGridEmail">
           <Form.Label>Select bike</Form.Label>
-          <Form.Select defaultValue="Choose...">
+          <Form.Select defaultValue={props.defValue}>
 
-            <option hidden>Choose...</option>
+            <option hidden>{props.defValue}</option>
             {
               bikeList && bikeList.map(bike => ( // error: ach child in a list should have a unique "key" prop.
                 <option /*key={bike.id} href={`#action/${bike.id}`}*/> 
@@ -130,14 +130,14 @@ function GridComplexExample() {
 }
 
 
-export default function Service() {
+export default function Service(props) {
 
   return (
     <div>
       <div><Header /></div>
       <p>Bike Service</p>
       <div>
-        <GridComplexExample />
+        <ServiceForm defValue={props.defValue} />
       </div>
     </div>
   );
