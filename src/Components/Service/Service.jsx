@@ -1,5 +1,5 @@
 import BookSlot from "./Calendar";
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from '../PageComponents/Header';
 
 import { format } from 'date-fns';
@@ -12,7 +12,7 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Modal from 'react-bootstrap/Modal';
 
-function Example() {
+/*function Example() {
   const [selected, setSelected] = React.useState();
 
   let footer = <p>Please pick a day.</p>;
@@ -27,7 +27,7 @@ function Example() {
       footer={footer}
     />
   );
-}
+}*/
 
 function ModalExample() {
   const [show, setShow] = useState(false);
@@ -74,16 +74,33 @@ function ModalExample() {
 
 
 function GridComplexExample() {
+
+  const [bikeList, setBikeList] = useState(null);
+
+  useEffect(() => {
+      fetch("http://localhost:5136/bike")
+          .then(response => response.json())
+          .then(data => setBikeList(data))
+          .catch(error => {
+              console.log('An error occurred:', error);
+          });
+  }, []);
+
   return (
     <Form>
       <Row className="mb-3">
         <Form.Group as={Col} controlId="formGridEmail">
           <Form.Label>Select bike</Form.Label>
           <Form.Select defaultValue="Choose...">
-            <option>Choose...</option>
-            <option>Gepida Alboin 500crs</option>
-            <option>CUBE Aim Pro 29" MTB</option>
-            <option>Kross Hexagon 3.0 blue grey 2022</option>
+
+            <option>Choose...</option> {/*probably it should be removed */}
+            {
+              bikeList && bikeList.map(bike => ( // error: ach child in a list should have a unique "key" prop.
+                <option /*key={bike.id} href={`#action/${bike.id}`}*/> 
+                  {`${bike.manufacturer} ${bike.model}`} 
+                </option>))
+            }
+
           </Form.Select>
         </Form.Group>
 
