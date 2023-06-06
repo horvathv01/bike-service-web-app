@@ -19,7 +19,7 @@ export default function ProfileNavbar() {
     return (
         <Navbar variant="dark" bg="dark" expand="lg">
             <Container fluid>
-                <Navbar.Brand as={Link} to="/bike-form">Add Bike</Navbar.Brand>
+                <Navbar.Brand as={Link} to="/profile/bike-form">Add Bike</Navbar.Brand>
                 <Navbar.Toggle aria-controls="navbar-dark-example" />
                 <Navbar.Collapse id="navbar-dark-example">
                     <Nav>

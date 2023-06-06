@@ -11,7 +11,7 @@ export default function Profile() {
         <ProfileNavbar />
       </div>
       <Container className="text-center mt-4">
-        <h1 className="text-primary fw-bold">Profile</h1>
+        <h1 className="text-light fw-bold">Profile</h1>
         <p className="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
       </Container>
     </div>

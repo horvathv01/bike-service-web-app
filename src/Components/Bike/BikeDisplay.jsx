@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faWrench } from '@fortawesome/free-solid-svg-icons';
 import {Container, Card, Button, Row, Col} from 'react-bootstrap';
-import './BikeDisplay.css'
+import '../../CustomStyles/Display.css'
 
 export default function BikeDisplay() {
   const navigate = useNavigate();
