@@ -1,6 +1,9 @@
 import { Routes, Route } from 'react-router-dom';
 import LandingPage from './LandingPage';
 import Profile from './Components/Profile/Profile';
+import User from './Components/User/User';
+import Users from './Components/User/Users';
+import UserForm from './Components/User/UserForm';
 import { Bike, ChooseNewOrUsed, NewBike } from './Components/Bike/Bike';
 import MyBikes from './Components/Bike/MyBikes';
 import BikeForm from './Components/Bike/BikeForm'
@@ -26,6 +29,8 @@ function App() {
         <Route path="/insurance" element={<Insurance />} />
         <Route path="/cart" element={<ShoppingCart />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/profile/users" element={<Users />} />
+        <Route path="/profile/user-form" element={<UserForm />} />
         <Route path="/profile/bikes" element={<MyBikes />} />
         <Route path="/profile/bike-form" element={<BikeForm />} />
         <Route path="/profile/tours" element={<Tours />} />
