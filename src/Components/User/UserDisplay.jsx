@@ -29,7 +29,7 @@ export default function UserDisplay() {
                     <Col key={user.id}>
                         <Card className="mb-3 mx-auto transparent-card" style={{ maxWidth: '400px' }}>
                             <Card.Body>
-                                <Card.Title>{user.Name}</Card.Title>
+                                <Card.Title>{user.name}</Card.Title>
                                 <Card.Text>
                                     <strong>User id:</strong> {user.id} <br />
                                     <strong>Email:</strong> {user.email}<br />

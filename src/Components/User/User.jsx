@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import Header from '../PageComponents/Header';
-import UserDisplay from './BikeDisplay';
+import UserDisplay from './UserDisplay';
 
-export function Bike() {
+export default function User() {
 
   const [userData, setUserData] = useState([]);
 
