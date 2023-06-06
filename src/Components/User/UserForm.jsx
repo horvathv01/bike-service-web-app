@@ -89,7 +89,7 @@ function UserForm() {
 
         <Row className="mb-3">
           <Form.Group as={Col} controlId="formGridPassword">
-            <Form.Label>Email</Form.Label>
+            <Form.Label>Password</Form.Label>
             <Form.Control
               type="text"
               name="Password"
@@ -100,7 +100,7 @@ function UserForm() {
           </Form.Group>
 
           <Form.Group as={Col} controlId="formGridIntroduction">
-            <Form.Label>Wheel Size</Form.Label>
+            <Form.Label>Introduction</Form.Label>
             <Form.Control
               type="text"
               name="Introduction"
