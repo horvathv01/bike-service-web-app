@@ -21,7 +21,7 @@ export default function Tours() {
             name: 'Adventure between cities',
             folder: 'Trekking',
             description:
-                'Share your experiences of conquering country roads with your cycling friends! Come and take part in a fantastic adventure between cities! The tour takes you through beautiful landscapes with all kinds of experiences and pleasant relaxation.',
+                'Share your experiences of conquering country roads with your cycling friends! Come and take part in a fantastic adventure between cities! Cycle through beautiful landscapes with all kinds of experiences!',
             buttonText: 'Adventure Up!',
             buttonLink: 'https://example.com/subscribe',
             tourLink: 'https://example.com/tour2',
@@ -31,7 +31,7 @@ export default function Tours() {
             name: 'Urban culture roll',
             folder: 'City',
             description:
-                'Discover Budapest\'s cultural heritage from street to street, from the Basilica through Parlament to the Buda Castle. Enjoy relaxing in the Várkert Bazar surrounded by flowery parks, then roll down to the shade of the green trees of Margitsziget.',
+                'Discover Budapest\'s cultural heritage from the Basilica through Parlament to the Buda Castle. Enjoy the Várkert Bazar surrounded by flowery parks! Roll down to the shade of the green trees of Margitsziget!',
             buttonText: 'Go To The City!',
             buttonLink: 'https://example.com/subscribe',
             tourLink: 'https://example.com/tour3',
@@ -78,30 +78,81 @@ export default function Tours() {
                 interval={showModal ? null : 5000}
                 slide={!showModal}
                 keyboard={true}
-                className="mb-4">
+                className="mb-4"
+                fade
+            >
                 {tours.map((tour, index) => (
                     <Carousel.Item key={tour.id}>
                         <Row className="justify-content-center">
-                            <Col lg={4} md={6} className="mb-4">
-                                <Card>
-                                    <Card.Img
-                                        variant="top"
-                                        src={`${imagePath}/${tour.folder}/1.jpg`}
-                                        alt={tour.name}
-                                    />
-                                    <Card.Body>
-                                        <Card.Title>{tour.name}</Card.Title>
-                                        <Card.Text>{tour.description}</Card.Text>
-                                        <Button variant="primary" onClick={() => openModal(index)}>
-                                            Learn More
-                                        </Button>
-                                        
-                                    </Card.Body>
-                                    <Card.Footer>
-                                        <Button variant="dark" href={tour.buttonLink}>{tour.buttonText}</Button>
-                                    </Card.Footer>
-                                </Card>
-                            </Col>
+                            {[index - 1, index, index + 1].map((carouselIndex) => {
+                                let currentTour;
+
+                                if (carouselIndex === -1) {
+                                    currentTour = tours[tours.length - 1];
+                                } else if (carouselIndex === tours.length) {
+                                    currentTour = tours[0];
+                                } else {
+                                    currentTour = tours[carouselIndex];
+                                }
+
+                                if (!currentTour) return null; // Check if the tour exists
+
+                                const isActive = carouselIndex === index;
+                                const isPrev = carouselIndex === index - 1;
+                                const isNext = carouselIndex === index + 1;
+
+                                let cardStyle = {};
+                                let transitionDelay = 0;
+
+
+                                if (isActive) {
+                                    cardStyle = { transform: "scale(1)" };
+
+                                } else if (isPrev) {
+                                    cardStyle = { transform: "translateX(5%) scale(0.9)", opacity: 0.7 };
+
+                                    transitionDelay = 200;
+                                } else if (isNext) {
+                                    cardStyle = { transform: "translateX(-5%) scale(0.9)", opacity: 0.7 };
+
+                                    transitionDelay = 200;
+                                }
+
+                                return (
+                                    <Col
+                                        lg={4}
+                                        md={6}
+                                        className="mb-4"
+                                        key={currentTour.id}
+                                        style={{ transitionDelay }}
+                                    >
+                                        <Card className={`tour-card ${isActive ? "active" : ""}`}
+                                            style={cardStyle}
+                                        >
+                                            <Card.Img
+                                                variant="top"
+                                                src={`${imagePath}/${currentTour.folder}/1.jpg`}
+                                                alt={currentTour.name}
+                                            />
+                                            <Card.Body>
+                                                <Card.Title>{currentTour.name}</Card.Title>
+                                                <Card.Text>{currentTour.description}</Card.Text>
+                                                <Button
+                                                    variant="primary"
+                                                    onClick={() => openModal(carouselIndex)}
+                                                >
+                                                    Learn More
+                                                </Button>
+                                            </Card.Body>
+                                            <Card.Footer>
+                                                <Button variant="dark" href={currentTour.buttonLink}>
+                                                    {currentTour.buttonText}
+                                                </Button>
+                                            </Card.Footer>
+                                        </Card>
+                                    </Col>
+                                );
+                            })}
                         </Row>
                     </Carousel.Item>
                 ))}
@@ -112,7 +163,6 @@ export default function Tours() {
                     <Modal.Title>{tours[activeTourIndex].name}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-
                     <Carousel
                         activeIndex={modalImageIndex}
                         onSelect={handleModalSelect}
@@ -133,7 +183,6 @@ export default function Tours() {
                             ))}
                     </Carousel>
                 </Modal.Body>
-
             </Modal>
         </div>
     );
