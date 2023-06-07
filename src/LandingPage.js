@@ -18,6 +18,10 @@ export default function WelcomeMessage(){
       fetchData();
     }, []);
 
+    function Register(){
+      navigate("/registration");
+    }
+
 function Login(){
 
     fetch("http://localhost:5136/login", {
@@ -49,6 +53,7 @@ function Login(){
         <p>Password</p>
         <input id="password" type="password" value={password} onChange={(e) => setPassword(e.target.value)}></input>
         <button onClick={() => Login()}>Login</button>
+        <button onClick={() => Register()}>Registration</button>
       </div>
     );  
 }
