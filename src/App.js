@@ -15,6 +15,7 @@ import Webshop from './Components/Webshop/Webshop';
 import ShoppingCart from './Components/Webshop/ShoppingCart';
 import Success from './Components/ActionResponse/Success';
 import Error from './Components/ActionResponse/Error';
+import Registration from './Components/Registration';
 import './App.css';
 import '@progress/kendo-theme-default/dist/all.css';
 
@@ -23,6 +24,7 @@ function App() {
     <div>
       <Routes>
         <Route path="/" element={<LandingPage />} />
+        <Route path="/registration" element={<Registration />} />
         <Route path="/news" element={<News />} />
         <Route path="/service" element={<Service />} />
         <Route path="/tours" element={<Tours />} />
