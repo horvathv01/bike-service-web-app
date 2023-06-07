@@ -14,24 +14,43 @@ export default function Registration(){
             window.alert("Name field cannot be empty!");
             return false;
         }
-        if(email == ""){
-            window.alert("Email field cannot be empty!");
+        if(!validateEmail()){
+            window.alert("Invalid e-mail address!");
+            setEmail("");
             return false;
         }
         if(!checkPasswordMatch()){
+            window.alert("Passwords do not match!");
+            setPassword("");
+            setPasswordConfirm("");
+            return false;
+        }
+        if(!validatePassword()){
+            window.alert("A password has to be at least 6 characters long, and has to contain at least one of these: uppercase letters, lowercase letters, numbers, symbols (!@#$%^&*)!");
+            setPassword("");
+            setPasswordConfirm("");
             return false;
         }
         if(!validatePhone()){
+            window.alert("Invalid phone number!");
+            setPhone("");
             return false;
         }
         return true;
     }
 
+    function validatePassword(){
+        if(!checkPasswordMatch()) return false;
+        if(password.length < 6) return false;
+        if(!/[A-Z]/.test(password)) return false;
+        if(!/[a-z]/.test(password)) return false;
+        if(!/\d/.test(password)) return false;
+        if(!/[!@#$%^&*]/.test(password)) return false;
+        return true;
+    }
+
     function checkPasswordMatch(){
         if(password !== passwordConfirm){
-            setPassword("");
-            setPasswordConfirm("");
-            window.alert("Passwords do not match!");
             return false;
         }
         return true;
@@ -39,19 +58,40 @@ export default function Registration(){
 
     function validatePhone(){
         //cannot be empty --> return false
+        if(phone == ""){
+            return false;
+        }
         //should contain numbers + a few allowed characters only: "+", "/", "-"
-        //should have min. length of 10, max length of 16? (I don't really know)
-        //if phone number is valid: return true
-        //else return false;
+        const allowedChars = "+/-0123456789";
+        for(let i = 0; i < phone.length; i++){
+            const char = phone.charAt(i);
+            if(!allowedChars.includes(char)){
+                return false;
+            }
+        }
+
+        //should have min. length of 7, max length of 16? (I don't really know)
+        if(phone.length < 7 || phone.length > 16){
+            return false;
+        }
+        //valid:
+        return true;
     }
 
     function validateEmail(email){
         //cannot be empty --> return false
+        if(email == "") return false;
         //search for @ --> should have only one
+        const atIndex = email.indexOf("@");
+        if(atIndex === -1 || email.indexOf("@", atIndex + 1) !== -1) return false;
         //should have at least one dot around end
+        if(email.lastIndexOf(".") < atIndex + 2) return false;
         //should have stuff before @
         //should have stuff after @
+        if(atIndex == 0 || atIndex == email.length - 1) return false;
         //cannot have dot before/after @
+        if(email[atIndex - 1] === "." || email[atIndex + 1] === ".") return false;
+        return true;
         //if all above are true: setEmail(email); return true;
         //else: setEmail(null);, window.alert("Invalid e-mail address!"); return false;
     }
@@ -60,15 +100,46 @@ export default function Registration(){
         if(!validateUserInput()){
             return;
         }
-        //fetch POST to endpoint with valid user data
-    }
+        const userDto = {
+            name,
+            email,
+            password,
+            phone,
+            introduction,
+            premium: false,
+            bikes: [],
+            tours: [],
+            transactionHistory: [],
+            roles: []
+          };
+      
+          fetch('http://localhost:5136/access/register', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': 'BikeServiceTokenSuperSafeAwesomeYea'
+            },
+            body: JSON.stringify(userDto)
+          })
+            .then(response => {
+              if (response.ok) {
+                window.alert("Registration successful! Please log in!");
+                navigate('/');
+              } else {
+                window.alert("Something went wrong!");
+              }
+            })
+            .catch(error => {
+            });
+        }
+    
     
     
     
     return(
         <div>
             <div>
-        <div><Header/></div>        
+            <Header/>       
     </div>
             <h1>Please input your information!</h1>
             <p>Name:</p>
