@@ -39,6 +39,10 @@ function Login(){
       }
     })
   }
+
+  function Register(){
+    navigate("/registration");
+  }
   
     return (
       <div>
@@ -49,6 +53,7 @@ function Login(){
         <p>Password</p>
         <input id="password" type="password" value={password} onChange={(e) => setPassword(e.target.value)}></input>
         <button onClick={() => Login()}>Login</button>
+        <button onClick={() => Register()}>Registration</button>
       </div>
     );  
 }
