@@ -18,22 +18,24 @@ import Error from './Components/ActionResponse/Error';
 import Registration from './Components/Registration';
 import './App.css';
 import '@progress/kendo-theme-default/dist/all.css';
+import { useState } from 'react';
 
 function App() {
+  const [defValue, setDefValue] = useState("Choose...");
   return (
     <div>
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/registration" element={<Registration />} />
         <Route path="/news" element={<News />} />
-        <Route path="/service" element={<Service />} />
+        <Route path="/service" element={<Service defValue={defValue}/>} />
         <Route path="/tours" element={<Tours />} />
         <Route path="/insurance" element={<Insurance />} />
         <Route path="/cart" element={<ShoppingCart />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/profile/users" element={<Users />} />
         <Route path="/profile/user-form" element={<UserForm />} />
-        <Route path="/profile/bikes" element={<MyBikes />} />
+        <Route path="/profile/bikes" element={<MyBikes setDefValue={setDefValue}/>} />
         <Route path="/profile/bike-form" element={<BikeForm />} />
         <Route path="/profile/tours" element={<Tours />} />
         <Route path="/profile/appointments" element={<Profile />} />

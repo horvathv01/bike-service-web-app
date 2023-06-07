@@ -3,7 +3,7 @@ import ProfileNavbar from "../Profile/ProfileNavBar";
 import BikeDisplay from "./BikeDisplay";
 import { Container, Row, Col } from 'react-bootstrap';
 
-export default function MyBikes() {
+export default function MyBikes(props) {
     return (
       <div>
         <Header />
@@ -12,7 +12,7 @@ export default function MyBikes() {
           <Row>
             <Col className="text-center">
               <h1 className="mb-4">My Bikes</h1>
-              <BikeDisplay />
+              <BikeDisplay setDefValue={props.setDefValue}/>
             </Col>
           </Row>
         </Container>

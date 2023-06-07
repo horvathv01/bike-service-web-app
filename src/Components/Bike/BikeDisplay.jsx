@@ -5,10 +5,11 @@ import { faWrench } from '@fortawesome/free-solid-svg-icons';
 import {Container, Card, Button, Row, Col} from 'react-bootstrap';
 import '../../CustomStyles/Display.css'
 
-export default function BikeDisplay() {
+export default function BikeDisplay(props) {
   const navigate = useNavigate();
   const [bikeList, setBikeList] = useState([]);
   const [error, setError] = useState(null);
+
 
   useEffect(() => {
     fetch("http://localhost:5136/bike")
@@ -39,7 +40,10 @@ export default function BikeDisplay() {
                   <strong>State:</strong> {bike.state}<br />
                   <strong>Insured:</strong> {bike.insured ? "yes" : "no"}
                 </Card.Text>
-                <Button variant="primary" onClick={() => navigate(`/service`)}>
+                <Button variant="primary" onClick={() => {
+                  props.setDefValue(`${bike.manufacturer} ${bike.model}`);
+                  navigate(`/service`)
+                  }}>
                   <FontAwesomeIcon icon={faWrench} className="me-2" />Service bike
                 </Button>
               </Card.Body>
@@ -49,6 +53,8 @@ export default function BikeDisplay() {
       </Row>
     );
   }
+
+
 
   return (
     <Container>
