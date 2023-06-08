@@ -1,7 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 import LoginPage from './Components/User/LoginPage';
 import Profile from './Components/Profile/Profile';
-import User from './Components/User/User';
+import ServiceInfo from './Components/BikeService/ServiceInfo';
 import Users from './Components/User/Users';
 import UserForm from './Components/User/UserForm';
 import { Bike, ChooseNewOrUsed, NewBike } from './Components/Bike/Bike';
@@ -29,6 +29,8 @@ function App() {
   return (
     <div>
       <Routes>
+        <Route path='/' element={<ServiceInfo/>}/>
+
         <Route path="/login" element={<LoginPage />} />
         <Route path="/registration" element={<Registration />} />
         <Route path="/news" element={<News />} />
