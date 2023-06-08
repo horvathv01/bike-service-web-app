@@ -23,7 +23,7 @@ export default function WelcomeMessage(){
     }
 
 function Login(){
-  const credentialsParsed = btoa(userName + ":" + password);
+  const credentialsParsed = btoa(`${userName}:${password}`);
 
     fetch("http://localhost:5136/access/login", {
       method: "POST",
@@ -32,7 +32,6 @@ function Login(){
         "Authorization": credentialsParsed
       },
       credentials: "include",
-      body: JSON.stringify()
     })
     .then(response => {
       if (response.ok) {

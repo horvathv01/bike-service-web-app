@@ -25,7 +25,7 @@ function Header() {
             <NavDropdown title={<FontAwesomeIcon icon={faUser} />} id="basic-nav-dropdown" align = "end">
               <NavDropdown.Item href="/profile">My Profile</NavDropdown.Item>
               <NavDropdown.Item href="/profile/bikes">My Bikes</NavDropdown.Item>
-              <NavDropdown.Item href="/profile/tours">My Tours</NavDropdown.Item>
+              <NavDropdown.Item href="/tours">My Tours</NavDropdown.Item>
               <NavDropdown.Item href="/profile/appointments">My Appointments</NavDropdown.Item>
               <NavDropdown.Divider />
               <NavDropdown.Item href="/logout">Logout</NavDropdown.Item>
