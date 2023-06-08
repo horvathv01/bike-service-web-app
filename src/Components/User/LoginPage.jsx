@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import {useNavigate} from 'react-router-dom';
-import Header from './Components/PageComponents/Header';
-import serverConnection from './Components/ServerConnection';
+import Header from '../PageComponents/Header';
+import serverConnection from '../ServerConnection';
 
 export default function WelcomeMessage(){
     const [greeting, setGreeting] = useState('');
@@ -23,19 +23,20 @@ export default function WelcomeMessage(){
     }
 
 function Login(){
+  const credentialsParsed = btoa(userName + ":" + password);
 
-    fetch("http://localhost:5136/login", {
+    fetch("http://localhost:5136/access/login", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        "Authorization": credentialsParsed
       },
-      body: JSON.stringify({userName, password})
+      credentials: "include",
+      body: JSON.stringify()
     })
-    .then(response => response.json())
-    .then(data => {
-      if(data.status.ToLowerCase === "ok"){
-        setUser(data.user.Id);
-        navigate("/webshop");
+    .then(response => {
+      if (response.ok) {
+        navigate('/profile');
       } else {
         setUserName("");
         setPassword("");
