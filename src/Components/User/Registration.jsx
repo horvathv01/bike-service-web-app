@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import {useNavigate} from 'react-router-dom';
 import Header from '../PageComponents/Header';
 
 export default function Registration(){
@@ -8,6 +9,7 @@ export default function Registration(){
     const [passwordConfirm, setPasswordConfirm] = useState("");
     const[phone, setPhone] = useState("");
     const [introduction, setIntroduction] = useState("");
+    const navigate = useNavigate();
 
     function validateUserInput(){
         if(name == ""){
@@ -78,9 +80,9 @@ export default function Registration(){
         return true;
     }
 
-    function validateEmail(email){
+    function validateEmail(){
         //cannot be empty --> return false
-        if(email == "") return false;
+        if(!email || email == "") return false;
         //search for @ --> should have only one
         const atIndex = email.indexOf("@");
         if(atIndex === -1 || email.indexOf("@", atIndex + 1) !== -1) return false;

@@ -43,6 +43,10 @@ function Login(){
       }
     })
   }
+
+  function Register(){
+    navigate("/registration");
+  }
   
     return (
       <div>
