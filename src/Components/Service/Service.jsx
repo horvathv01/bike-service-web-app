@@ -76,6 +76,7 @@ function ModalExample() {
 function ServiceForm(props) {
 
   const [bikeList, setBikeList] = useState(null);
+  const [serviceList, setServiceList] = useState(null);
 
   useEffect(() => {
       fetch("http://localhost:5136/bike")
@@ -85,6 +86,15 @@ function ServiceForm(props) {
               console.log('An error occurred:', error);
           });
   }, []);
+
+  useEffect(() => {
+    fetch("http://localhost:5136/serviceevent")
+        .then(response => response.json())
+        .then(data => setServiceList(data))
+        .catch(error => {
+            console.log('An error occurred:', error);
+        });
+}, []);
 
   return (
     <Form>
@@ -107,10 +117,13 @@ function ServiceForm(props) {
         <Form.Group as={Col} controlId="formGridEmail">
           <Form.Label>Select service</Form.Label>
           <Form.Select defaultValue="Choose...">
-            <option>Choose...</option>
-            <option>Centering</option>
-            <option>Inner tube replacement</option>
-            <option>General Servic</option>
+            <option hidden>Choose...</option>
+            {
+              serviceList && serviceList.map(service => (
+                <option> 
+                  {service.type} 
+                </option>))
+            }
           </Form.Select>
         </Form.Group>
 
