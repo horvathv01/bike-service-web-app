@@ -1,5 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
-import LandingPage from './LandingPage';
+import LoginPage from './Components/User/LoginPage';
 import Profile from './Components/Profile/Profile';
 import User from './Components/User/User';
 import Users from './Components/User/Users';
@@ -29,7 +29,7 @@ function App() {
   return (
     <div>
       <Routes>
-        <Route path="/" element={<LandingPage />} />
+        <Route path="/login" element={<LoginPage />} />
         <Route path="/registration" element={<Registration />} />
         <Route path="/news" element={<News />} />
         <Route path="/service" element={<Service defValue={defValue}/>} />
@@ -44,7 +44,7 @@ function App() {
         <Route path="/profile/bike-form" element={<BikeForm />} />
         <Route path="/profile/tours" element={<Tours />} />
         <Route path="/profile/appointments" element={<Profile />} />
-        <Route path="/logout" element={<LandingPage />} />
+        <Route path="/logout" element={<LoginPage />} />
 
         <Route path="/webshop" element={<Webshop />} />
         <Route path="/webshop/bikes" element={<ChooseNewOrUsed />} />
@@ -55,9 +55,9 @@ function App() {
         <Route path="/webshop/accessories" element={<Webshop />} />
 
         <Route path="/admin/registerperson" element={<RegisterPersonByAdmin />} />
-        <Route path="admin/registeruser" element={<RegisterUserByAdmin />} />
-        <Route path="admin/registercolleague" element={<RegisterColleagueByAdmin />} />
-        <Route path="admin/registeradmin" element={<RegisterAdminByAdmin />} />
+        <Route path="/admin/registeruser" element={<RegisterUserByAdmin />} />
+        <Route path="/admin/registercolleague" element={<RegisterColleagueByAdmin />} />
+        <Route path="/admin/registeradmin" element={<RegisterAdminByAdmin />} />
 
         <Route path="/*" element={<Error message="Page not found" />} />
         <Route path="/error" element={<Error message="An error occurred. Please try again." />} />

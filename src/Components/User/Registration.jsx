@@ -70,7 +70,7 @@ export default function Registration(){
             .then(response => {
               if (response.ok) {
                 window.alert("Registration successful! Please log in!");
-                navigate('/');
+                navigate('/login');
               } else {
                 window.alert("Something went wrong!");
               }
