@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
 import {useNavigate} from 'react-router-dom';
 import Header from '../PageComponents/Header';
+import { validateEmail, validatePassword, validatePhone, checkPasswordMatch } from '../User/Registration';
 import { Button, Col, Form, Row} from 'react-bootstrap';
 
-export default function Registration(){
+export default function RegisterUserByAdmin(){
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [passwordConfirm, setPasswordConfirm] = useState("");
     const[phone, setPhone] = useState("");
     const [introduction, setIntroduction] = useState("");
+    const [premium, setPremium] = useState(false);
     const navigate = useNavigate();
 
     function validateUserInput(){
@@ -52,14 +54,14 @@ export default function Registration(){
             password,
             phone,
             introduction,
-            premium: false,
+            premium,
             bikes: [],
             tours: [],
             transactionHistory: [],
             roles: []
           };
       
-          fetch('http://localhost:5136/access/register', {
+          fetch('http://localhost:5136/access/admin/registeruser', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -78,13 +80,13 @@ export default function Registration(){
             .catch(error => {
             });
         }
-    
+
     return(
         <div>
         <div>
           <Header />
         </div>
-        <h1>Register to Bike Service</h1>
+        <h1>Register New User</h1>
         <Form onSubmit={(e) => {
             e.preventDefault();
              register();
@@ -158,70 +160,20 @@ export default function Registration(){
             </Form.Group>
           </Row>
   
+          <Form.Group className="mb-3" controlId="formGridPremium">
+            <Form.Check
+              type="checkbox"
+              name="Premium"
+              checked={premium}
+              onChange={(e) => setPremium(e.target.checked)}
+              label="Premium"
+            />
+          </Form.Group>
+  
           <Button variant="primary" type="submit">
             Register
           </Button>
         </Form>
       </div>
     )
-}
-
-export function validatePassword(pw1, pw2){
-    if(!checkPasswordMatch(pw1, pw2)) return false;
-    if(pw1.length < 6) return false;
-    if(!/[A-Z]/.test(pw1)) return false;
-    if(!/[a-z]/.test(pw1)) return false;
-    if(!/\d/.test(pw1)) return false;
-    if(!/[!@+#$%^&*]/.test(pw1)) return false;
-    return true;
-}
-
-export function checkPasswordMatch(pw1, pw2){
-    if(pw1 !== pw2){
-        return false;
-    }
-    return true;
-}
-
-export function validatePhone(phoneNum){
-    //cannot be empty --> return false
-    if(phoneNum == ""){
-        return false;
-    }
-    //should contain numbers + a few allowed characters only: "+", "/", "-"
-    const allowedChars = "+/-0123456789";
-    for(let i = 0; i < phoneNum.length; i++){
-        const char = phoneNum.charAt(i);
-        if(!allowedChars.includes(char)){
-            return false;
-        }
-    }
-    const lastChar = phoneNum.charAt(phoneNum.length - 1);
-    if (!/\d/.test(lastChar)) {
-      return false;
-    }
-    //should have min. length of 7, max length of 16? (I don't really know)
-    if(phoneNum.length < 7 || phoneNum.length > 16){
-        return false;
-    }
-    //valid:
-    return true;
-}
-
-export function validateEmail(emailAddress){
-    //cannot be empty --> return false
-    if(!emailAddress || emailAddress == "") return false;
-    //search for @ --> should have only one
-    const atIndex = emailAddress.indexOf("@");
-    if(atIndex === -1 || emailAddress.indexOf("@", atIndex + 1) !== -1) return false;
-    //should have at least one dot around end
-    if(emailAddress.lastIndexOf(".") < atIndex + 2) return false;
-    //should have stuff before @
-    //should have stuff after @
-    if(atIndex == 0 || atIndex == emailAddress.length - 1) return false;
-    //cannot have dot before/after @
-    if(emailAddress[atIndex - 1] === "." || emailAddress[atIndex + 1] === ".") return false;
-    return true;
-    //if all above are true: setEmail(email); return true;
-    //else: setEmail(null);, window.alert("Invalid e-mail address!"); return false;
 }

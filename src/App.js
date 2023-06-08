@@ -16,6 +16,10 @@ import ShoppingCart from './Components/Webshop/ShoppingCart';
 import Success from './Components/ActionResponse/Success';
 import Error from './Components/ActionResponse/Error';
 import Registration from './Components/User/Registration';
+import RegisterPersonByAdmin from './Components/Admin/RegisterPersonByAdmin';
+import RegisterAdminByAdmin from './Components/Admin/RegisterAdminByAdmin';
+import RegisterColleagueByAdmin from './Components/Admin/RegisterColleagueByAdmin';
+import RegisterUserByAdmin from './Components/Admin/RegisterUserByAdmin';
 import './App.css';
 import '@progress/kendo-theme-default/dist/all.css';
 import { useState } from 'react';
@@ -32,6 +36,7 @@ function App() {
         <Route path="/tours" element={<Tours />} />
         <Route path="/insurance" element={<Insurance />} />
         <Route path="/cart" element={<ShoppingCart />} />
+
         <Route path="/profile" element={<Profile />} />
         <Route path="/profile/users" element={<Users />} />
         <Route path="/profile/user-form" element={<UserForm />} />
@@ -40,6 +45,7 @@ function App() {
         <Route path="/profile/tours" element={<Tours />} />
         <Route path="/profile/appointments" element={<Profile />} />
         <Route path="/logout" element={<LandingPage />} />
+
         <Route path="/webshop" element={<Webshop />} />
         <Route path="/webshop/bikes" element={<ChooseNewOrUsed />} />
         <Route path="/webshop/bikes/new" element={<NewBike />} />
@@ -47,6 +53,12 @@ function App() {
         <Route path="/webshop/parts" element={<Webshop />} />
         <Route path="/webshop/tools" element={<Webshop />} />
         <Route path="/webshop/accessories" element={<Webshop />} />
+
+        <Route path="/admin/registerperson" element={<RegisterPersonByAdmin />} />
+        <Route path="admin/registeruser" element={<RegisterUserByAdmin />} />
+        <Route path="admin/registercolleague" element={<RegisterColleagueByAdmin />} />
+        <Route path="admin/registeradmin" element={<RegisterAdminByAdmin />} />
+
         <Route path="/*" element={<Error message="Page not found" />} />
         <Route path="/error" element={<Error message="An error occurred. Please try again." />} />
         <Route path="/success" element={<Success />} />
