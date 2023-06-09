@@ -71,7 +71,7 @@ function ModalExample() {
 }
 
 
-
+// TODO: Chose from service events by dropdown texts, and add new service event by event name, date, bike, colleague.
 
 function ServiceForm(props) {
 

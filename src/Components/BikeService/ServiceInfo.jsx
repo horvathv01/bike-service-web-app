@@ -4,9 +4,9 @@ import { Container,Card, Button, Row, Col } from 'react-bootstrap';
 
 export default function ServiceInfo() {
   const shop = {
-    name: 'Awesome Shop',
+    name: 'Bike Service',
     description:
-      'Welcome to Awesome Shop, your one-stop destination for all your shopping needs. We offer a wide range of products from electronics to fashion, home decor to beauty products. Explore our collection and find the best deals!',
+      'Welcome to BikeService, your one-stop destination for all your  bike related service. We offer a wide range of products.',
     imageSrc: './ServiceImages/1.jpg',
       buttonText: 'Awesome Bike Life',
     buttonLink: 'https://example.com/shop',
