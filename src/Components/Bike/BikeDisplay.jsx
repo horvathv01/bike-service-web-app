@@ -14,7 +14,10 @@ export default function BikeDisplay(props) {
 
 
   useEffect(() => {
-    fetch("http://localhost:5136/bike")
+    fetch("http://localhost:5136/bike",
+    {
+      credentials:'include'
+    })
       .then(response => response.json())
       .then(data => setBikeList(data))
       .catch(err => {
