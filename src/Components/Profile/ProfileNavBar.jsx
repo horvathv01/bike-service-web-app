@@ -8,7 +8,7 @@ export default function ProfileNavbar() {
     const [bikeList, setBikeList] = useState(null);
 
     useEffect(() => {
-        fetch("http://localhost:5136/bike")
+        fetch("https://localhost:7237/bike")
             .then(response => response.json())
             .then(data => setBikeList(data))
             .catch(error => {

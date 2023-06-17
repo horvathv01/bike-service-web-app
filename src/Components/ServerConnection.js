@@ -3,7 +3,7 @@ export default function serverConnection(body, type, apiRoute) {
 
     return new Promise((resolve, reject) => {
       try {
-        fetch(`http://localhost:5136/${apiRoute}`, fetchObj)
+        fetch(`https://localhost:7237/${apiRoute}`, fetchObj)
         .then(response => {
           const contentType = response.headers.get('Content-Type');
           if(contentType && contentType.includes('application/json')){
@@ -51,7 +51,7 @@ function setFetch(body, type) {
 
 function ReturnAllFetchData(body){
 const urlsAndObjects = { login: {
-  url: "http://localhost:5136/login",
+  url: "https://localhost:7237/login",
   body: {
     method: "POST",
     headers: {
@@ -61,7 +61,7 @@ const urlsAndObjects = { login: {
   }
 }, 
 getUser: {
-  url: "http://localhost:5136/users",
+  url: "https://localhost:7237/users",
   body: {
     method: "GET",
     headers: {

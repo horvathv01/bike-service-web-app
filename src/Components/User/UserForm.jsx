@@ -1,51 +1,93 @@
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
-import { Button, Col, Form, Row } from 'react-bootstrap';
+import { useState, useEffect } from 'react';
+import { Button, Col, Form, Row, InputGroup, Modal } from 'react-bootstrap';
 import Header from '../PageComponents/Header';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import { validateRegistration } from '../../Utilities/ValidateRegistration';
+import { calculatePasswordStrength } from '../../Utilities/PasswordStrengthMeter';
 
 function UserForm() {
   const navigate = useNavigate();
   const [error, setError] = useState(null);
+  const [showModal, setShowModal] = useState(false);
+  const [passwordCheck, setPasswordCheck] = useState('');
+  const [passwordMatch, setPasswordMatch] = useState(true);
+  const [passwordStrength, setPasswordStrength] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [user, setUser] = useState({
     Name: '',
     Email: '',
     Phone: '',
+    Password: '',
     Premium: false,
     Roles: [],
     Introduction: '',
+    Insurances: [],
   });
+
+  useEffect(() => {
+    console.log('Updated user:', user);
+  }, [user]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setUser((prevUser) => ({ ...prevUser, [name]: value }));
   };
 
-  const handleRoleChange = (e) => {
-    const { value, checked } = e.target;
-    setUser((prevUser) => {
-      if (checked) {
-        return { ...prevUser, Roles: [...prevUser.Roles, value] };
-      } else {
-        return { ...prevUser, Roles: prevUser.Roles.filter((role) => role !== value) };
-      }
-    });
+  const handlePasswordChange = (e) => {
+    const { name, value } = e.target;
+    const strength = calculatePasswordStrength(value);
+    setPasswordStrength(strength);
+    setUser((prevUser) => ({ ...prevUser, [name]: value }));
+  };
+
+  const handlePasswordCheckChange = (e) => {
+    const { value } = e.target;
+    setPasswordCheck(value);
+    setPasswordMatch(user.Password === value);
+  };
+
+  const handlePasswordCheck = () => {
+    if (user.Password !== passwordCheck) {
+      setError('Passwords do not match.');
+    } else {
+      setError(null);
+    }
   };
 
   const handleIntroductionChange = (value) => {
     setUser((prevUser) => ({ ...prevUser, Introduction: value }));
   };
 
+  const handlePremiumChange = (e) => {
+    setUser((prevUser) => ({ ...prevUser, Premium: e.target.checked }));
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const validationErrors = validateRegistration(user, passwordCheck);
+    if (Object.keys(validationErrors).length > 0) {
+      console.log('Validation errors:', validationErrors);
+      const errorMessages = Object.entries(validationErrors)
+        .map(([fieldName, errorMessage]) => `${fieldName}: ${errorMessage}`)
+        .join('\n');
+      setError(errorMessages);
+      setShowModal(true);
+      return;
+    }
+
     try {
-      const response = await fetch('http://localhost:5136/user', {
+      console.log(`User: ${JSON.stringify(user)}`);
+      const response = await fetch('https://localhost:7237/access/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': 'BikeServiceTokenSuperSafeAwesomeYea'
         },
         body: JSON.stringify(user),
+
       });
 
       if (response.ok) {
@@ -61,7 +103,15 @@ function UserForm() {
       setError('An error occurred. Please try again!', { state: { message: { error } } });
       navigate('/error');
     }
-    console.log(`User: ${JSON.stringify(user)}`);
+
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
   };
 
   return (
@@ -69,129 +119,142 @@ function UserForm() {
       <div>
         <Header />
       </div>
-      <Form onSubmit={handleSubmit}>
-        <Row className="mb-3">
-          <Form.Group as={Col} controlId="formGridName">
-            <Form.Label>Name</Form.Label>
-            <Form.Control
-              type="text"
-              name="Name"
-              value={user.Name}
-              onChange={handleChange}
-              placeholder="Enter Name!"
-              required
-            />
-            <Form.Control.Feedback type="invalid">Name is required.</Form.Control.Feedback>
-          </Form.Group>
+      <div className='m-3 text-center'>
+        <Modal show={showModal} onHide={handleCloseModal}>
+          <Modal.Header closeButton>
+            <Modal.Title>Error</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            {error && <pre className="text-danger">{error}</pre>}
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleCloseModal}>
+              Close
+            </Button>
+          </Modal.Footer>
+        </Modal>
+        <Form onSubmit={handleSubmit}>
+          <Row className="mb-3">
+            <Form.Group as={Col} controlId="formGridName">
+              <Form.Label>Name</Form.Label>
+              <Form.Control
+                type="text"
+                name="Name"
+                value={user.Name}
+                onChange={handleChange}
+                placeholder="Enter Name!"
+                required
+              />
+              <Form.Control.Feedback type="invalid">Name is required.</Form.Control.Feedback>
+            </Form.Group>
 
-          <Form.Group as={Col} controlId="formGridPhone">
-            <Form.Label>Phone number</Form.Label>
-            <Form.Control
-              type="text"
-              name="Phone"
-              value={user.Phone}
-              onChange={handleChange}
-              placeholder="Enter phone number!"
-              required
-            />
-            <Form.Control.Feedback type="invalid">Phone number is required.</Form.Control.Feedback>
-          </Form.Group>
+            <Form.Group as={Col} controlId="formGridPhone">
+              <Form.Label>Phone number</Form.Label>
+              <Form.Control
+                type="text"
+                name="Phone"
+                value={user.Phone}
+                onChange={handleChange}
+                placeholder="Enter phone number!"
+                required
+              />
+              <Form.Control.Feedback type="invalid">Phone number is required.</Form.Control.Feedback>
+            </Form.Group>
 
-          <Form.Group as={Col} controlId="formGridEmail">
-            <Form.Label>Email</Form.Label>
-            <Form.Control
-              type="email"
-              name="Email"
-              value={user.Email}
-              onChange={handleChange}
-              placeholder="Enter email address!"
-              required
-            />
-            <Form.Control.Feedback type="invalid">Email is required.</Form.Control.Feedback>
-          </Form.Group>
-        </Row>
+            <Form.Group as={Col} controlId="formGridEmail">
+              <Form.Label>Email</Form.Label>
+              <Form.Control
+                type="email"
+                name="Email"
+                value={user.Email}
+                onChange={handleChange}
+                placeholder="Enter email address!"
+                required
+              />
+              <Form.Control.Feedback type="invalid">Please enter a valid email address.</Form.Control.Feedback>
+            </Form.Group>
+          </Row>
 
-        <Row className="mb-3">
-          <Form.Group as={Col} controlId="formGridPassword">
-            <Form.Label>Password</Form.Label>
-            <Form.Control
-              type="password"
-              name="Password"
-              value={user.Password}
-              onChange={handleChange}
-              placeholder="User password"
-              required
-            />
-            <Form.Control.Feedback type="invalid">Password is required.</Form.Control.Feedback>
-          </Form.Group>
-        </Row>
+          <Row className="mb-3">
+            <Form.Group as={Col} controlId='formGridPassword' className='mb-3 mx-auto'>
+              <Form.Label>Password</Form.Label>
+              <InputGroup>
+                <Form.Control
+                  type={showPassword ? 'text' : 'password'}
+                  name='Password'
+                  value={user.Password}
+                  onChange={handlePasswordChange}
+                  placeholder='User password'
+                  required
+                />
+                <Button variant='outline-secondary' onClick={togglePasswordVisibility}>
+                  {showPassword ? <FaEyeSlash /> : <FaEye />}
+                </Button>
+              </InputGroup>
+              {passwordStrength && <div className="text-muted">{passwordStrength}</div>}
+              {!passwordStrength && (
+                <br />
+              )}
+              <Form.Control.Feedback type='invalid'>Password is required.</Form.Control.Feedback>
+            </Form.Group>
 
-        <Form.Group className="mb-3" controlId="formGridRoles">
-          <Form.Label>Roles</Form.Label>
-          <Form.Check
-            type="checkbox"
-            id="standardUser"
-            name="Roles"
-            value="StandardUser"
-            label="Standard User"
-            checked={user.Roles.includes('StandardUser')}
-            onChange={handleRoleChange}
-          />
-          <Form.Check
-            type="checkbox"
-            id="premiumUser"
-            name="Roles"
-            value="PremiumUser"
-            label="Premium User"
-            checked={user.Roles.includes('PremiumUser')}
-            onChange={handleRoleChange}
-          />
-          <Form.Check
-            type="checkbox"
-            id="colleague"
-            name="Roles"
-            value="Colleague"
-            label="Colleague"
-            checked={user.Roles.includes('Colleague')}
-            onChange={handleRoleChange}
-          />
-          <Form.Check
-            type="checkbox"
-            id="admin"
-            name="Roles"
-            value="Admin"
-            label="Admin"
-            checked={user.Roles.includes('Admin')}
-            onChange={handleRoleChange}
-          />
-          <Form.Control.Feedback type="invalid">At least one role must be selected.</Form.Control.Feedback>
-        </Form.Group>
+            <Form.Group as={Col} controlId='formGridPasswordCheck' className='mb-3 mx-auto'>
+              <Form.Label>Password Check</Form.Label>
+              <InputGroup>
+                <Form.Control
+                  type={showPassword ? 'text' : 'password'}
+                  name='PasswordCheck'
+                  value={passwordCheck}
+                  onChange={handlePasswordCheckChange}
+                  onBlur={handlePasswordCheck}
+                  placeholder='Re-enter password'
+                  required
+                />
+                <Button variant='outline-secondary' onClick={togglePasswordVisibility}>
+                  {showPassword ? <FaEyeSlash /> : <FaEye />}
+                </Button>
+              </InputGroup>
+              {!passwordMatch && <div className='text-danger'>Passwords do not match.</div>}
+              <Form.Control.Feedback type='invalid'>Please re-enter the password.</Form.Control.Feedback>
+            </Form.Group>
+          </Row>
 
-        <Row className="mb-3">
-          <Form.Group as={Col} controlId="formGridIntroduction">
-            <Form.Label>Introduction</Form.Label>
-            <ReactQuill
-              value={user.Introduction}
-              onChange={handleIntroductionChange}
-              placeholder="Enter your introduction..."
-            />
-          </Form.Group>
-        </Row>
+          <Row className="mb-3 justify-content-center">
+            <Form.Group as={Col} controlId="formGridIntroduction" className='justify-content-center text-center'>
+              <Form.Label>Introduction</Form.Label>
+              <ReactQuill
+                value={user.Introduction}
+                onChange={handleIntroductionChange}
+                placeholder="Enter your introduction..."
+                style={{ margin: '0 auto', width: '70%' }}
+              />
+            </Form.Group>
+          </Row>
 
-        <Form.Group className="mb-3" controlId="formGridPremium">
-          <Form.Check
-            type="checkbox"
-            name="Premium"
-            checked={user.Premium}
-            onChange={(e) => setUser((prevUser) => ({ ...prevUser, Premium: e.target.checked }))}
-            label="Subscribed"
-          />
-        </Form.Group>
+          <Row className='mb-3 justify-content-center'>
+            <Col xs={12} sm={3} className=" d-flex justify-content-center">
+              <Form.Group className="mb-3 " controlId="formGridPremium">
+                <Form.Check
+                  type="checkbox"
+                  name="Premium"
+                  checked={user.Premium}
+                  onChange={handlePremiumChange}
+                  label="Premium"
+                />
+              </Form.Group>
+            </Col>
+          </Row>
 
-        <Button variant="primary" type="submit">
-          Submit
-        </Button>
-      </Form>
+          <Row className="mb-3 justify-content-center ">
+            <Col xs={12} sm={12} className="text-center ">
+              {error && <pre className="text-danger">{error}</pre>}
+              <Button variant="primary" type="submit" className='mb-3'>
+                Submit
+              </Button>
+            </Col>
+          </Row>
+        </Form>
+      </div>
     </div>
   );
 }
