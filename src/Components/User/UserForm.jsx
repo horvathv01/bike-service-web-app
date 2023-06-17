@@ -65,8 +65,14 @@ function UserForm() {
     setUser((prevUser) => ({ ...prevUser, Premium: e.target.checked }));
   };
 
+  useEffect(() => {
+    const introductionWithoutTags = user.Introduction.replace(/<\/?p>/g, '');
+    setUser((prevUser) => ({ ...prevUser, Introduction: introductionWithoutTags }));
+  }, [user.Introduction]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     const validationErrors = validateRegistration(user, passwordCheck);
     if (Object.keys(validationErrors).length > 0) {
       console.log('Validation errors:', validationErrors);
