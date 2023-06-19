@@ -20,19 +20,19 @@ export function calculatePasswordStrength(password) {
   
     let strengthLabel = '';
     switch (strength) {
-      case 0:
+      case 1:
         strengthLabel = 'Very Weak';
         break;
-      case 1:
+      case 2:
         strengthLabel = 'Weak';
         break;
-      case 2:
+      case 3:
         strengthLabel = 'Moderate';
         break;
-      case 3:
+      case 4:
         strengthLabel = 'Strong';
         break;
-      case 4:
+      case 5:
         strengthLabel = 'Very Strong';
         break;
       default:

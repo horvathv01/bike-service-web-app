@@ -63,8 +63,8 @@ export default function Registration(){
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
-              'Authorization': 'BikeServiceTokenSuperSafeAwesomeYea'
             },
+            credentials: 'include',
             body: JSON.stringify(userDto)
           })
             .then(response => {
