@@ -1,6 +1,8 @@
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Header from '../PageComponents/Header';
+import Image from 'react-bootstrap/Image';
+import '../../CustomStyles/Transition.css';
 
 const Success = () => {
   const location = useLocation();
@@ -10,9 +12,12 @@ const Success = () => {
   return (
     <div>
       <div><Header /></div>
-      <h2>Success</h2>
-      {message && <p>{message}</p>}
-      <button onClick={() => navigate(-1)}>Go Back</button>
+      <div className="m-3 d-flex flex-column align-items-center">
+        <h2>Success</h2>
+        {message && <p>{message}</p>}
+        <Image src="/ServiceImages/success.jpg" className="my-4 bg-image rounded responsive bg-opacity" />
+        <button className='m-3' onClick={() => navigate(-1)}>Go Back</button>
+      </div>
     </div>
   );
 };
