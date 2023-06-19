@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Button, Col, Form, Row, InputGroup, Modal } from 'react-bootstrap';
 import Header from '../PageComponents/Header';
 import ReactQuill from 'react-quill';
@@ -26,10 +26,6 @@ function UserForm() {
     Introduction: '',
     Insurances: [],
   });
-
-  useEffect(() => {
-    console.log('Updated user:', user);
-  }, [user]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -65,15 +61,13 @@ function UserForm() {
     setUser((prevUser) => ({ ...prevUser, Premium: e.target.checked }));
   };
 
-  useEffect(() => {
-    const introductionWithoutTags = user.Introduction.replace(/<\/?p>/g, '');
-    setUser((prevUser) => ({ ...prevUser, Introduction: introductionWithoutTags }));
-  }, [user.Introduction]);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const validationErrors = validateRegistration(user, passwordCheck);
+    const introductionWithoutTags = user.Introduction.slice(3,-4);
+    const updatedUser = { ...user, Introduction: introductionWithoutTags };
+
+    const validationErrors = validateRegistration(updatedUser, passwordCheck);
     if (Object.keys(validationErrors).length > 0) {
       console.log('Validation errors:', validationErrors);
       const errorMessages = Object.entries(validationErrors)
@@ -92,7 +86,7 @@ function UserForm() {
           'Content-Type': 'application/json',
           'Authorization': 'BikeServiceTokenSuperSafeAwesomeYea'
         },
-        body: JSON.stringify(user),
+        body: JSON.stringify(updatedUser),
 
       });
 
@@ -226,7 +220,7 @@ function UserForm() {
           </Row>
 
           <Row className="mb-3 justify-content-center">
-            <Form.Group as={Col} controlId="formGridIntroduction" className='justify-content-center text-center'>
+            <Form.Group as={Col} controlId="formGridIntroduction" className='justify-content-center'>
               <Form.Label>Introduction</Form.Label>
               <ReactQuill
                 value={user.Introduction}
