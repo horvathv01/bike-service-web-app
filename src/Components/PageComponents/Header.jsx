@@ -6,7 +6,7 @@ import { faHome, faUser } from '@fortawesome/free-solid-svg-icons';
 function Header() {
 
   return (
-    <Navbar bg="light" expand="lg">
+    <Navbar data-testid="header" bg="light" expand="lg">
       <Container>
         <Navbar.Brand href="/">
           <FontAwesomeIcon icon={faHome} className="me-2" />
