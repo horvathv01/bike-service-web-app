@@ -12,23 +12,6 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Modal from 'react-bootstrap/Modal';
 
-/*function Example() {
-  const [selected, setSelected] = React.useState();
-
-  let footer = <p>Please pick a day.</p>;
-  if (selected) {
-    footer = <p>You picked {format(selected, 'PP')}.</p>;
-  }
-  return (
-    <DayPicker
-      mode="single"
-      selected={selected}
-      onSelect={setSelected}
-      footer={footer}
-    />
-  );
-}*/
-
 function ModalExample() {
   const [show, setShow] = useState(false);
   const [buttonText, setButtonText] = useState("Click for selecting slot");
@@ -71,7 +54,7 @@ function ModalExample() {
 }
 
 
-
+// TODO: Chose from service events by dropdown texts, and add new service event by event name, date, bike, colleague.
 
 function ServiceForm(props) {
 
@@ -79,7 +62,7 @@ function ServiceForm(props) {
   const [serviceList, setServiceList] = useState(null);
 
   useEffect(() => {
-      fetch("http://localhost:5136/bike")
+      fetch("https://localhost:7237/bike")
           .then(response => response.json())
           .then(data => setBikeList(data))
           .catch(error => {
@@ -88,7 +71,7 @@ function ServiceForm(props) {
   }, []);
 
   useEffect(() => {
-    fetch("http://localhost:5136/serviceevent")
+    fetch("https://localhost:7237/serviceevent")
         .then(response => response.json())
         .then(data => setServiceList(data))
         .catch(error => {

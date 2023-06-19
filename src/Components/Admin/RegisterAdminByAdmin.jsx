@@ -60,7 +60,7 @@ export default function RegisterAdminByAdmin(){
             roles: []
           };
       
-          fetch('http://localhost:5136/access/admin/registeradmin', {
+          fetch('https://localhost:7237/access/admin/registeradmin', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',

@@ -8,7 +8,7 @@ export default function Tours() {
     const tours = [
         {
             id: 1,
-            name: 'Racin in the mountains',
+            name: 'Racing in the mountains',
             folder: 'MountainSpeed',
             description:
                 'A fantastic tour in the Italian Alps. Wonderful view, beautiful mountain ranges, winding roads. A real experience that we can share with our friends.',

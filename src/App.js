@@ -1,14 +1,14 @@
 import { Routes, Route } from 'react-router-dom';
 import LoginPage from './Components/User/LoginPage';
 import Profile from './Components/Profile/Profile';
-import User from './Components/User/User';
+import ServiceInfo from './Components/BikeServiceInfo/ServiceInfo';
 import Users from './Components/User/Users';
 import UserForm from './Components/User/UserForm';
 import { Bike, ChooseNewOrUsed, NewBike } from './Components/Bike/Bike';
 import MyBikes from './Components/Bike/MyBikes';
 import BikeForm from './Components/Bike/BikeForm'
 import News from './Components/PageComponents/News';
-import Service from './Components/Service/Service';
+import Service from './Components/BikeService/Service';
 import Insurance from './Components/Bike/Insurance';
 import Tours from './Components/Tour/Tours';
 import Webshop from './Components/Webshop/Webshop';
@@ -29,8 +29,10 @@ function App() {
   return (
     <div>
       <Routes>
+        <Route path='/' element={<ServiceInfo/>}/>
+
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/registration" element={<Registration />} />
+        <Route path="/registration" element={<UserForm />} />
         <Route path="/news" element={<News />} />
         <Route path="/service" element={<Service defValue={defValue}/>} />
         <Route path="/tours" element={<Tours />} />

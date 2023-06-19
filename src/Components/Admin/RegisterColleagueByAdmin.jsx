@@ -62,7 +62,7 @@ export default function RegisterColleagueByAdmin(){
           };
           console.log(colleagueDto);
       
-          fetch('http://localhost:5136/access/admin/registercolleague', {
+          fetch('https://localhost:7237/access/admin/registercolleague', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',

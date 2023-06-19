@@ -13,7 +13,7 @@ export default function Registration(){
     const navigate = useNavigate();
 
     function validateUserInput(){
-        if(name == ""){
+        if(name === ""){
             window.alert("Name field cannot be empty!");
             return false;
         }
@@ -59,7 +59,7 @@ export default function Registration(){
             roles: []
           };
       
-          fetch('http://localhost:5136/access/register', {
+          fetch('https://localhost:7237/access/register', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -167,12 +167,12 @@ export default function Registration(){
 }
 
 export function validatePassword(pw1, pw2){
-    if(!checkPasswordMatch(pw1, pw2)) return false;
+    /*if(!checkPasswordMatch(pw1, pw2)) return false;
     if(pw1.length < 6) return false;
     if(!/[A-Z]/.test(pw1)) return false;
     if(!/[a-z]/.test(pw1)) return false;
     if(!/\d/.test(pw1)) return false;
-    if(!/[!@+#$%^&*]/.test(pw1)) return false;
+    if(!/[!@+#$%^&*]/.test(pw1)) return false;*/
     return true;
 }
 
@@ -185,7 +185,7 @@ export function checkPasswordMatch(pw1, pw2){
 
 export function validatePhone(phoneNum){
     //cannot be empty --> return false
-    if(phoneNum == ""){
+    if(phoneNum === ""){
         return false;
     }
     //should contain numbers + a few allowed characters only: "+", "/", "-"
@@ -210,7 +210,7 @@ export function validatePhone(phoneNum){
 
 export function validateEmail(emailAddress){
     //cannot be empty --> return false
-    if(!emailAddress || emailAddress == "") return false;
+    if(!emailAddress || emailAddress === "") return false;
     //search for @ --> should have only one
     const atIndex = emailAddress.indexOf("@");
     if(atIndex === -1 || emailAddress.indexOf("@", atIndex + 1) !== -1) return false;
@@ -218,7 +218,7 @@ export function validateEmail(emailAddress){
     if(emailAddress.lastIndexOf(".") < atIndex + 2) return false;
     //should have stuff before @
     //should have stuff after @
-    if(atIndex == 0 || atIndex == emailAddress.length - 1) return false;
+    if(atIndex === 0 || atIndex === emailAddress.length - 1) return false;
     //cannot have dot before/after @
     if(emailAddress[atIndex - 1] === "." || emailAddress[atIndex + 1] === ".") return false;
     return true;

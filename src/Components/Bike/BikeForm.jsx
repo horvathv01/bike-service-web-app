@@ -28,7 +28,7 @@ function BikeForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost:5136/bike', {
+      const response = await fetch('https://localhost:7237/bike', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
