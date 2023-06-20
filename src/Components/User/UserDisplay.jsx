@@ -11,7 +11,10 @@ export default function UserDisplay() {
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        fetch("https://localhost:7237/user")
+        fetch("https://localhost:7237/user",
+        {
+          credentials:'include'
+        })
             .then(response => response.json())
             .then(data => setUserList(data))
             .catch(err => {

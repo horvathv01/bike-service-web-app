@@ -84,7 +84,6 @@ function UserForm() {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': 'BikeServiceTokenSuperSafeAwesomeYea'
         },
         body: JSON.stringify(updatedUser),
 
