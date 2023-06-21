@@ -13,64 +13,8 @@ describe('BikeDisplay component', () => {
           manufacturer: 'Honda',
           model: 'CBR',
           vin: '123456789',
-          bikeType: 'Sport',
-          wheelSize: '17 inches',
-          frameSize: 'Medium',
-          state: 'Active',
-          insured: true,
-        },
-        // Add more sample bike objects as needed
-        {
-          id: 2,
-          manufacturer: 'Honda',
-          model: 'CBR',
-          vin: '123456789',
-          bikeType: 'Sport',
-          wheelSize: '17 inches',
-          frameSize: 'Medium',
-          state: 'Active',
-          insured: true,
-        },
-        {
-          id: 3,
-          manufacturer: 'Honda',
-          model: 'CBR',
-          vin: '123456789',
-          bikeType: 'Sport',
-          wheelSize: '17 inches',
-          frameSize: 'Medium',
-          state: 'Active',
-          insured: true,
-        },
-        {
-          id: 4,
-          manufacturer: 'Honda',
-          model: 'CBR',
-          vin: '123456789',
-          bikeType: 'Sport',
-          wheelSize: '17 inches',
-          frameSize: 'Medium',
-          state: 'Active',
-          insured: true,
-        },
-        {
-          id: 5,
-          manufacturer: 'Honda',
-          model: 'CBR',
-          vin: '123456789',
-          bikeType: 'Sport',
-          wheelSize: '17 inches',
-          frameSize: 'Medium',
-          state: 'Active',
-          insured: true,
-        },
-        {
-          id: 6,
-          manufacturer: 'Honda',
-          model: 'CBR',
-          vin: '123456789',
-          bikeType: 'Sport',
-          wheelSize: '17 inches',
+          bikeType: 'Trekking',
+          wheelSize: '17',
           frameSize: 'Medium',
           state: 'Active',
           insured: true,
@@ -79,7 +23,7 @@ describe('BikeDisplay component', () => {
     });
 
     // Render the BikeDisplay component within a BrowserRouter
-    render(
+    const view = await render(
       <BrowserRouter>
         <BikeDisplay />
       </BrowserRouter>
@@ -89,14 +33,11 @@ describe('BikeDisplay component', () => {
     await waitFor(() => screen.findByText('Honda CBR'));
 
     // Assert that the bike list is rendered correctly
-    expect(screen.getByText('Honda CBR')).toBeInTheDocument();
-/*     expect(screen.getByText('VIN: 123456789')).toBeInTheDocument();*/
-    expect(screen.getByText('Type:' /* Sport' */)).toBeInTheDocument();
-    expect(screen.getByText('Wheel Size: 17 inches')).toBeInTheDocument();
-    expect(screen.getByText('Frame Size: Medium')).toBeInTheDocument();
-    expect(screen.getByText('State: Active')).toBeInTheDocument();
-    expect(screen.getByText('Insured: yes')).toBeInTheDocument(); 
+    expect(screen.getByTestId('cardtext')).toHaveTextContent('VIN: 123456789');
+    expect(screen.getByTestId('cardtext')).toHaveTextContent('Type: Trekking');
+    expect(screen.getByTestId('cardtext')).toHaveTextContent('Wheel Size: 17');
+    expect(screen.getByTestId('cardtext')).toHaveTextContent('Frame Size: Medium');
+    expect(screen.getByTestId('cardtext')).toHaveTextContent('State: Active');
+    expect(screen.getByTestId('cardtext')).toHaveTextContent('Insured: yes');
   });
-
-  // Add more test cases as needed
 });
