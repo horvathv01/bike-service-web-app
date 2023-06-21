@@ -1,10 +1,12 @@
 FROM node:alpine
 
+LABEL authors="Tomi, Vili, Krisztián"
+
 WORKDIR /app
 
 COPY package*.json ./
 
-RUN npm install
+RUN npm ci
 
 COPY . .
 
