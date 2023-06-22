@@ -49,7 +49,7 @@ function setFetch(body, type) {
 }
 
 
-function ReturnAllFetchData(body){
+/*function ReturnAllFetchData(body){
 const urlsAndObjects = { login: {
   url: "https://localhost:7237/login",
   body: {
@@ -73,7 +73,7 @@ getUser: {
 
 
 return urlsAndObjects;
-}
+}*/
 
 //call this like: 
 // ReturnAllFetchData(body).login.url;

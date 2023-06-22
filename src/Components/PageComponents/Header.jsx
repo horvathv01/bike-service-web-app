@@ -1,8 +1,8 @@
-import { useState } from 'react';
+
 import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faUser } from '@fortawesome/free-solid-svg-icons';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 function Header() {
 

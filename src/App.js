@@ -15,7 +15,6 @@ import Webshop from './Components/Webshop/Webshop';
 import ShoppingCart from './Components/Webshop/ShoppingCart';
 import Success from './Components/ActionResponse/Success';
 import Error from './Components/ActionResponse/Error';
-import Registration from './Components/User/Registration';
 import RegisterPersonByAdmin from './Components/Admin/RegisterPersonByAdmin';
 import RegisterAdminByAdmin from './Components/Admin/RegisterAdminByAdmin';
 import RegisterColleagueByAdmin from './Components/Admin/RegisterColleagueByAdmin';

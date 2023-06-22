@@ -1,6 +1,6 @@
 import React from 'react';
 import Header from '../PageComponents/Header';
-import { Container,Card, Button, Row, Col } from 'react-bootstrap';
+import { Container, Button } from 'react-bootstrap';
 
 export default function ServiceInfo() {
   const shop = {

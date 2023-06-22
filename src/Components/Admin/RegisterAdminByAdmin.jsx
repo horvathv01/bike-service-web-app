@@ -14,7 +14,7 @@ export default function RegisterAdminByAdmin(){
     const navigate = useNavigate();
 
     function validateUserInput(){
-        if(name == ""){
+        if(name === ""){
             window.alert("Name field cannot be empty!");
             return false;
         }

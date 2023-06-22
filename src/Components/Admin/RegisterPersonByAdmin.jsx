@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+
 import {useNavigate} from 'react-router-dom';
 import Header from '../PageComponents/Header';
-import { validateEmail, validatePassword, validatePhone, checkPasswordMatch } from '../User/Registration';
+
 
 export default function RegisterPersonByAdmin(){
     const navigate = useNavigate();
