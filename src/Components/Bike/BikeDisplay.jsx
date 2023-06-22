@@ -15,7 +15,7 @@ export default function BikeDisplay(props) {
 
 
   useEffect(() => {
-    fetch(`https://${ServerUrlAndPort().url}:${ServerUrlAndPort().port}/bike`,
+    fetch(`${ServerUrlAndPort().host}://${ServerUrlAndPort().url}:${ServerUrlAndPort().port}/bike`,
     {
       credentials:'include'
     })

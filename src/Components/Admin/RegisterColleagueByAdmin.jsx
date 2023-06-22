@@ -63,7 +63,7 @@ export default function RegisterColleagueByAdmin(){
           };
           console.log(colleagueDto);
       
-          fetch(`https://${ServerUrlAndPort().url}:${ServerUrlAndPort().port}/access/admin/registercolleague`, {
+          fetch(`${ServerUrlAndPort().host}://${ServerUrlAndPort().url}:${ServerUrlAndPort().port}/access/admin/registercolleague`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',

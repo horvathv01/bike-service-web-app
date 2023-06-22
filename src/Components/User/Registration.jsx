@@ -60,7 +60,7 @@ export default function Registration(){
             roles: []
           };
       
-          fetch(`https://${ServerUrlAndPort().url}:${ServerUrlAndPort().port}/access/register`, {
+          fetch(`${ServerUrlAndPort().host}://${ServerUrlAndPort().url}:${ServerUrlAndPort().port}/access/register`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',

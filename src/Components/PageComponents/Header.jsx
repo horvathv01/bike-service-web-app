@@ -13,7 +13,7 @@ function Header() {
   const handleLogout = () => {
     console.log(`goodbye, ${user}`);
     logout();
-    fetch(`https://${ServerUrlAndPort().url}:${ServerUrlAndPort().port}/access/logout`, {
+    fetch(`${ServerUrlAndPort().host}://${ServerUrlAndPort().url}:${ServerUrlAndPort().port}/access/logout`, {
       method: 'POST',
       credentials: 'include',
     })
@@ -38,8 +38,10 @@ function Header() {
         <Navbar.Brand href="/">
           <FontAwesomeIcon icon={faHome} className="me-2" />
           Bike Service
-          </Navbar.Brand>
+        </Navbar.Brand>
+        <Navbar.Text>{user && user.username}</Navbar.Text>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        {user && user.name ? <p>Hello, {user.name}!</p> : <p></p>}
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto">
             <Nav.Link href="/login">Log In</Nav.Link>

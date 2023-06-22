@@ -8,7 +8,7 @@ export default function ProfileNavbar() {
     const [bikeList, setBikeList] = useState(null);
 
     useEffect(() => {
-        fetch(`https://${ServerUrlAndPort().url}:${ServerUrlAndPort().port}/bike`,
+        fetch(`${ServerUrlAndPort().host}://${ServerUrlAndPort().url}:${ServerUrlAndPort().port}/bike`,
     {
       credentials:'include'
     })

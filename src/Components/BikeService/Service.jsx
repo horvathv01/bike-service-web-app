@@ -64,7 +64,7 @@ function ServiceForm(props) {
   const [serviceList, setServiceList] = useState(null);
 
   useEffect(() => {
-      fetch(`https://${ServerUrlAndPort().url}:${ServerUrlAndPort().port}/bike`,
+      fetch(`${ServerUrlAndPort().host}://${ServerUrlAndPort().url}:${ServerUrlAndPort().port}/bike`,
       {
         credentials:'include'
       })
@@ -76,7 +76,7 @@ function ServiceForm(props) {
   }, []);
 
   useEffect(() => {
-    fetch(`https://${ServerUrlAndPort().url}:${ServerUrlAndPort().port}/serviceevent`)
+    fetch(`${ServerUrlAndPort().url}://${ServerUrlAndPort().url}:${ServerUrlAndPort().port}/serviceevent`)
         .then(response => response.json())
         .then(data => setServiceList(data))
         .catch(error => {

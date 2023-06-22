@@ -61,7 +61,7 @@ export default function RegisterAdminByAdmin(){
             roles: []
           };
       
-          fetch(`https://${ServerUrlAndPort().url}:${ServerUrlAndPort().port}/access/admin/registeradmin`, {
+          fetch(`${ServerUrlAndPort().host}://${ServerUrlAndPort().url}:${ServerUrlAndPort().port}/access/admin/registeradmin`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',

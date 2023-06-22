@@ -4,8 +4,9 @@ export default function serverConnection(body, type, apiRoute) {
     const fetchObj = setFetch(body, type);
 
     return new Promise((resolve, reject) => {
+      console.log(`${ServerUrlAndPort().host}://${ServerUrlAndPort().url}:${ServerUrlAndPort().port}/${apiRoute}`)
       try {
-        fetch(`https://${ServerUrlAndPort().url}:${ServerUrlAndPort().port}/${apiRoute}`, fetchObj)
+        fetch(`${ServerUrlAndPort().host}://${ServerUrlAndPort().url}:${ServerUrlAndPort().port}/${apiRoute}`, fetchObj)
         .then(response => {
           const contentType = response.headers.get('Content-Type');
           if(contentType && contentType.includes('application/json')){
