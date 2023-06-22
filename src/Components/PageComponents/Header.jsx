@@ -1,15 +1,19 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faUser } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { UserContext } from '../User/UserContext';
+import ServerUrlAndPort from '../ServerURLAndPort.js';
 
 function Header() {
-
+  const {user, login, logout} = useContext(UserContext);
   const navigate = useNavigate(); // Add this line
 
   const handleLogout = () => {
-    fetch('https://localhost:7237/access/logout', {
+    console.log(`goodbye, ${user}`);
+    logout();
+    fetch(`https://${ServerUrlAndPort().url}:${ServerUrlAndPort().port}/access/logout`, {
       method: 'POST',
       credentials: 'include',
     })

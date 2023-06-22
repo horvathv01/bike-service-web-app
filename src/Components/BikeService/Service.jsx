@@ -12,6 +12,8 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Modal from 'react-bootstrap/Modal';
 
+import ServerUrlAndPort from "../ServerURLAndPort.js";
+
 function ModalExample() {
   const [show, setShow] = useState(false);
   const [buttonText, setButtonText] = useState("Click for selecting slot");
@@ -62,7 +64,7 @@ function ServiceForm(props) {
   const [serviceList, setServiceList] = useState(null);
 
   useEffect(() => {
-      fetch("https://localhost:7237/bike",
+      fetch(`https://${ServerUrlAndPort().url}:${ServerUrlAndPort().port}/bike`,
       {
         credentials:'include'
       })
@@ -74,7 +76,7 @@ function ServiceForm(props) {
   }, []);
 
   useEffect(() => {
-    fetch("https://localhost:7237/serviceevent")
+    fetch(`https://${ServerUrlAndPort().url}:${ServerUrlAndPort().port}/serviceevent`)
         .then(response => response.json())
         .then(data => setServiceList(data))
         .catch(error => {

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import {useNavigate} from 'react-router-dom';
 import Header from '../PageComponents/Header';
 import { Button, Col, Form, Row} from 'react-bootstrap';
+import ServerUrlAndPort from '../ServerURLAndPort.js';
 
 export default function Registration(){
     const [name, setName] = useState("");
@@ -59,7 +60,7 @@ export default function Registration(){
             roles: []
           };
       
-          fetch('https://localhost:7237/access/register', {
+          fetch(`https://${ServerUrlAndPort().url}:${ServerUrlAndPort().port}/access/register`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',

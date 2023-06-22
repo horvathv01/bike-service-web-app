@@ -1,9 +1,11 @@
+import ServerUrlAndPort from "./ServerURLAndPort";
+
 export default function serverConnection(body, type, apiRoute) {
     const fetchObj = setFetch(body, type);
 
     return new Promise((resolve, reject) => {
       try {
-        fetch(`https://localhost:7237/${apiRoute}`, fetchObj)
+        fetch(`https://${ServerUrlAndPort().url}:${ServerUrlAndPort().port}/${apiRoute}`, fetchObj)
         .then(response => {
           const contentType = response.headers.get('Content-Type');
           if(contentType && contentType.includes('application/json')){

@@ -1,10 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button, Col, Form, Row } from 'react-bootstrap';
 import Header from '../PageComponents/Header';
 import serverConnection from '../ServerConnection';
+import { UserContext } from './UserContext';
+import ServerUrlAndPort from '../ServerURLAndPort.js';
 
 export default function WelcomeMessage() {
+  const {user, login, logout} = useContext(UserContext)
   const [greeting, setGreeting] = useState('');
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
@@ -19,9 +22,11 @@ export default function WelcomeMessage() {
   }, []);
 
   function handleLogin() {
+    console.log(`fetch is gonna go here: {https://${ServerUrlAndPort().url}:${ServerUrlAndPort().port}/access/login}`);
     const credentialsParsed = btoa(`${userName}:${password}`);
+    console.log(`fetch contains this: ${credentialsParsed}`);
 
-    fetch('https://localhost:7237/access/login', {
+    fetch(`https://${ServerUrlAndPort().url}:${ServerUrlAndPort().port}/access/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -31,13 +36,16 @@ export default function WelcomeMessage() {
     })
       .then((response) => {
         if (response.ok) {
-          navigate('/profile');
+          return response.json();
         } else {
           setUserName('');
           setPassword('');
           window.alert('Invalid username or password!');
         }
-      });
+      })
+      .then(data => login(data));
+      navigate('/profile');
+      ;
   }
 
   function handleRegister() {

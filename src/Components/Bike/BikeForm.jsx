@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { Button, Col, Form, Row} from 'react-bootstrap';
 import Header from '../PageComponents/Header';
+import ServerUrlAndPort from '../ServerURLAndPort.js';
 
 function BikeForm() {
   const navigate = useNavigate();
@@ -28,7 +29,7 @@ function BikeForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('https://localhost:7237/bike', {
+      const response = await fetch(`https://${ServerUrlAndPort().url}:${ServerUrlAndPort().port}/bike`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

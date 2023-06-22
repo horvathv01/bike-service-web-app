@@ -3,6 +3,7 @@ import {useNavigate} from 'react-router-dom';
 import Header from '../PageComponents/Header';
 import { validateEmail, validatePassword, validatePhone, checkPasswordMatch } from '../User/Registration';
 import { Button, Col, Form, Row} from 'react-bootstrap';
+import ServerUrlAndPort from '../ServerURLAndPort';
 
 export default function RegisterAdminByAdmin(){
     const [name, setName] = useState("");
@@ -60,7 +61,7 @@ export default function RegisterAdminByAdmin(){
             roles: []
           };
       
-          fetch('https://localhost:7237/access/admin/registeradmin', {
+          fetch(`https://${ServerUrlAndPort().url}:${ServerUrlAndPort().port}/access/admin/registeradmin`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
