@@ -23,7 +23,7 @@ describe('BikeDisplay component', () => {
     });
 
     // Render the BikeDisplay component within a BrowserRouter
-    const view = await render(
+    await render(
       <BrowserRouter>
         <BikeDisplay />
       </BrowserRouter>

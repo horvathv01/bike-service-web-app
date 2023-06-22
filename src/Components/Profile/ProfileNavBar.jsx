@@ -29,7 +29,7 @@ export default function ProfileNavbar() {
                             menuVariant="dark"
                         >
                             {bikeList && bikeList.map(bike => (
-                                <NavDropdown.Item key={bike.id} href={`#action/${bike.id}`}>
+                                <NavDropdown.Item data-testid={bike.id} key={bike.id} href={`#action/${bike.id}`}>
                                     {bike.model}
                                 </NavDropdown.Item>
                             ))}
