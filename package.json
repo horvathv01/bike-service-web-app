@@ -19,6 +19,7 @@
     "@progress/kendo-react-inputs": "^5.13.1",
     "@progress/kendo-react-intl": "^5.13.1",
     "@progress/kendo-react-popup": "^5.13.1",
+    "@progress/kendo-react-progressbars": "^5.14.1",
     "@progress/kendo-react-scheduler": "^5.13.1",
     "@progress/kendo-react-treeview": "^5.13.1",
     "@progress/kendo-svg-icons": "^1.5.0",
