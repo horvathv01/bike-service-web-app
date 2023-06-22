@@ -23,11 +23,13 @@ import RegisterUserByAdmin from './Components/Admin/RegisterUserByAdmin';
 import './App.css';
 import '@progress/kendo-theme-default/dist/all.css';
 import { useState } from 'react';
+import { UserProvider } from './Components/User/UserProvider';
 
 function App() {
   const [defValue, setDefValue] = useState("Choose...");
   return (
     <div>
+      <UserProvider>
       <Routes>
         <Route path='/' element={<ServiceInfo/>}/>
 
@@ -65,6 +67,7 @@ function App() {
         <Route path="/error" element={<Error message="An error occurred. Please try again." />} />
         <Route path="/success" element={<Success />} />
       </Routes>
+      </UserProvider>
     </div>
   );
 }

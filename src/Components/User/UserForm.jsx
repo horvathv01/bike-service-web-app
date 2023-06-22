@@ -7,6 +7,7 @@ import 'react-quill/dist/quill.snow.css';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { validateRegistration } from '../../Utilities/ValidateRegistration';
 import { calculatePasswordStrength } from '../../Utilities/PasswordStrengthMeter';
+import ServerUrlAndPort from '../ServerURLAndPort.js';
 
 function UserForm() {
   const navigate = useNavigate();
@@ -80,7 +81,7 @@ function UserForm() {
 
     try {
       console.log(`User: ${JSON.stringify(user)}`);
-      const response = await fetch('https://localhost:7237/access/register', {
+      const response = await fetch(`https://${ServerUrlAndPort().url}:${ServerUrlAndPort().port}/access/register`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

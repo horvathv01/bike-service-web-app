@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faWrench } from '@fortawesome/free-solid-svg-icons';
 import {Container, Card, Button, Row, Col} from 'react-bootstrap';
+import ServerUrlAndPort from '../ServerURLAndPort.js';
 
 import '../../CustomStyles/Display.css';
 
@@ -14,7 +15,7 @@ export default function BikeDisplay(props) {
 
 
   useEffect(() => {
-    fetch("https://localhost:7237/bike",
+    fetch(`https://${ServerUrlAndPort().url}:${ServerUrlAndPort().port}/bike`,
     {
       credentials:'include'
     })

@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faWrench } from '@fortawesome/free-solid-svg-icons';
 import { Container, Card, Button, Row, Col } from 'react-bootstrap';
 import '../../CustomStyles/Display.css';
+import ServerUrlAndPort from '../ServerURLAndPort.js';
 
 export default function UserDisplay() {
     const navigate = useNavigate();
@@ -11,7 +12,7 @@ export default function UserDisplay() {
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        fetch("https://localhost:7237/user",
+        fetch(`https://${ServerUrlAndPort().url}:${ServerUrlAndPort().port}/user`,
         {
           credentials:'include'
         })

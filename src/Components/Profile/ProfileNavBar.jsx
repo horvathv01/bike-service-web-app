@@ -2,13 +2,13 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Navbar, Container, Nav, NavDropdown } from 'react-bootstrap';
-
+import ServerUrlAndPort from "../ServerURLAndPort";
 
 export default function ProfileNavbar() {
     const [bikeList, setBikeList] = useState(null);
 
     useEffect(() => {
-        fetch("https://localhost:7237/bike",
+        fetch(`https://${ServerUrlAndPort().url}:${ServerUrlAndPort().port}/bike`,
     {
       credentials:'include'
     })
