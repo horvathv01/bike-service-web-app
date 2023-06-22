@@ -52,7 +52,7 @@ export default function UserDisplay() {
     }
 
     return (
-        <Container>
+        <Container data-testid="user-display">
             <div>{listToElements()}</div>
         </Container>
     );

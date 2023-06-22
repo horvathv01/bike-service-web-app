@@ -36,7 +36,7 @@ export default function BikeDisplay(props) {
             <Card className="mb-3 mx-auto transparent-card" style={{ maxWidth: '400px' }}>
               <Card.Body>
                 <Card.Title>{bike.manufacturer} {bike.model}</Card.Title>
-                <Card.Text>
+                <Card.Text data-testid='cardtext'>
                   <strong>VIN:</strong> {bike.vin}<br />
                   <strong>Type:</strong> {bike.bikeType}<br />
                   <strong>Wheel Size:</strong> {bike.wheelSize}<br />
