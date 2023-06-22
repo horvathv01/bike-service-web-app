@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import Header from '../PageComponents/Header';
 
 
-import { DayPicker } from 'react-day-picker';
+
 import 'react-day-picker/dist/style.css';
 
 import Button from 'react-bootstrap/Button';

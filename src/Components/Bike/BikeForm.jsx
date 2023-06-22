@@ -43,12 +43,12 @@ function BikeForm() {
       } else {
         console.log('Failed to save bike.');
         setError('Failed to save bike. Please try again.');
-        navigate('/error', { state: { message: 'Failed to save bike. Please try again.' } });
+        navigate('/error', { state: { message: error } });
       }
     } catch (error) {
       console.log('An error occurred:', error);
       setError('An error occurred. Please try again.', { state: { message: 'An error occurred. Please try again.' } });
-      navigate('/error');
+      navigate('/error', { state: { message: error } });
     }
     console.log(JSON.stringify(bike));
   };

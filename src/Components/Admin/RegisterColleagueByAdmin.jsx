@@ -41,7 +41,7 @@ export default function RegisterColleagueByAdmin(){
             setPhone("");
             return false;
         }
-        if(skillLevel == ""){
+        if(skillLevel === ""){
             window.alert("Please specify skill level!");
             return false;
         }

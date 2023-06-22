@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../PageComponents/Header';
 import BikeDisplay from './BikeDisplay';
 
 export function Bike() {
 
-  const [bikeData, setBikeData] = useState([]);
+  
 
   return (
     <div>
