@@ -12,7 +12,7 @@ export default function UserDisplay() {
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        fetch(`https://${ServerUrlAndPort().url}:${ServerUrlAndPort().port}/user`,
+        fetch(`${ServerUrlAndPort().host}://${ServerUrlAndPort().url}:${ServerUrlAndPort().port}/user`,
         {
           credentials:'include'
         })

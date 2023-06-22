@@ -81,7 +81,7 @@ function UserForm() {
 
     try {
       console.log(`User: ${JSON.stringify(user)}`);
-      const response = await fetch(`https://${ServerUrlAndPort().url}:${ServerUrlAndPort().port}/access/register`, {
+      const response = await fetch(`${ServerUrlAndPort().host}://${ServerUrlAndPort().url}:${ServerUrlAndPort().port}/access/register`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

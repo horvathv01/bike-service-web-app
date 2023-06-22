@@ -22,11 +22,10 @@ export default function WelcomeMessage() {
   }, []);
 
   function handleLogin() {
-    console.log(`fetch is gonna go here: {https://${ServerUrlAndPort().url}:${ServerUrlAndPort().port}/access/login}`);
     const credentialsParsed = btoa(`${userName}:${password}`);
     console.log(`fetch contains this: ${credentialsParsed}`);
 
-    fetch(`https://${ServerUrlAndPort().url}:${ServerUrlAndPort().port}/access/login`, {
+    fetch(`${ServerUrlAndPort().host}://${ServerUrlAndPort().url}:${ServerUrlAndPort().port}/access/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

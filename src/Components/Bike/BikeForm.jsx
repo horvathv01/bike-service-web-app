@@ -29,7 +29,7 @@ function BikeForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(`https://${ServerUrlAndPort().url}:${ServerUrlAndPort().port}/bike`, {
+      const response = await fetch(`${ServerUrlAndPort().host}://${ServerUrlAndPort().url}:${ServerUrlAndPort().port}/bike`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
