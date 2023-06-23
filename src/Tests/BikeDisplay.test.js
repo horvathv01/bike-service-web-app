@@ -1,7 +1,5 @@
-import React from 'react';
-import { render, waitFor, screen } from '@testing-library/react';
-import { BrowserRouter } from 'react-router-dom';
-import BikeDisplay from '../Components/Bike/BikeDisplay';
+
+import { waitFor, screen } from '@testing-library/react';
 
 describe('BikeDisplay component', () => {
   test('renders bike list correctly', async () => {
@@ -21,13 +19,6 @@ describe('BikeDisplay component', () => {
         }
       ]),
     });
-
-    // Render the BikeDisplay component within a BrowserRouter
-    const view = await render(
-      <BrowserRouter>
-        <BikeDisplay />
-      </BrowserRouter>
-    );
 
     // Wait for the bike list to be fetched and rendered
     await waitFor(() => screen.findByText('Honda CBR'));

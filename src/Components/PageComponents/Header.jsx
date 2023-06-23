@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faUser } from '@fortawesome/free-solid-svg-icons';
@@ -7,6 +7,7 @@ import { UserContext } from '../User/UserContext';
 import ServerUrlAndPort from '../ServerURLAndPort.js';
 
 function Header() {
+  const [isOnline, setIsOnline] = useState(true);
   const {user, login, logout} = useContext(UserContext);
   const navigate = useNavigate(); // Add this line
 
@@ -19,7 +20,7 @@ function Header() {
     })
       .then((response) => {
         if (response.ok) {
-          navigate('/login'); // Redirect to login page after successful logout
+          navigate('/login');
         } else {
           return response.json().then((data) => {
             throw new Error(data.message || 'Logout failed');
@@ -31,6 +32,24 @@ function Header() {
         navigate('/error', { state: { message: error.message } });
       });
   };
+
+  useEffect(() => {
+    const checkAppStatus = async () => {
+      try {
+        const response = await fetch(`${ServerUrlAndPort().host}://${ServerUrlAndPort().url}:${ServerUrlAndPort().port}/healthcheck`);
+        if (response.ok) {
+          setIsOnline(true);
+        } else {
+          setIsOnline(false);
+        }
+      } catch (error) {
+        console.error('Health check error:', error);
+        setIsOnline(false);
+      }
+    };
+
+    checkAppStatus();
+  }, []);
 
   return (
     <Navbar data-testid="header" bg="light" expand="lg">
@@ -51,6 +70,9 @@ function Header() {
             <Nav.Link href="/insurance">Insurance</Nav.Link>
             <Nav.Link href="/news">News</Nav.Link>
             <Nav.Link href="/cart">Shopping Cart</Nav.Link>
+            <span className={`nav-link ${isOnline ? 'text-success' : 'text-danger'}`}>
+              {isOnline ? 'Online' : 'Offline'}
+            </span>
             <NavDropdown title={<FontAwesomeIcon icon={faUser} />} id="basic-nav-dropdown" align = "end">
               <NavDropdown.Item href="/profile">My Profile</NavDropdown.Item>
               <NavDropdown.Item href="/profile/bikes">My Bikes</NavDropdown.Item>

@@ -76,7 +76,7 @@ function ServiceForm(props) {
   }, []);
 
   useEffect(() => {
-    fetch(`${ServerUrlAndPort().url}://${ServerUrlAndPort().url}:${ServerUrlAndPort().port}/serviceevent`)
+    fetch(`${ServerUrlAndPort().host}://${ServerUrlAndPort().url}:${ServerUrlAndPort().port}/serviceevent`)
         .then(response => response.json())
         .then(data => setServiceList(data))
         .catch(error => {

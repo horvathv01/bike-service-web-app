@@ -1,9 +1,9 @@
 
 export default function ServerUrlAndPort(){
     const server = {
-        host: "http",
-        url: "192.168.0.106",
-        port: "5136"
+        host: "https",
+        url: "localhost",
+        port: "7237"
     };
     return server;
 }

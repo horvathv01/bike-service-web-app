@@ -50,36 +50,3 @@ function setFetch(body, type) {
   }
   return fetchObject;
 }
-
-
-function ReturnAllFetchData(body){
-const urlsAndObjects = { login: {
-  url: "https://localhost:7237/login",
-  body: {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({body})
-  }
-}, 
-getUser: {
-  url: "https://localhost:7237/users",
-  body: {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json"
-    }
-  }
-}};
-
-
-
-return urlsAndObjects;
-}
-
-//call this like: 
-// ReturnAllFetchData(body).login.url;
-
-// fetch(ReturnAllFetchData(body).login.url, ReturnAllFetchData(body).login.body)
-// .then()
