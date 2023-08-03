@@ -6,6 +6,7 @@ import ServerUrlAndPort from '../ServerURLAndPort.js';
 
 export default function Registration(){
     const [name, setName] = useState("");
+    const [validName, setValidName] = useState(false);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [passwordConfirm, setPasswordConfirm] = useState("");
@@ -15,7 +16,7 @@ export default function Registration(){
 
     function validateUserInput(){
         if(name === ""){
-            window.alert("Name field cannot be empty!");
+            window.alert("Username is required!");
             return false;
         }
         if(!validateEmail(email)){
@@ -42,6 +43,24 @@ export default function Registration(){
         }
         return true;
     }
+
+    function validateUserName(userName){
+      console.log("fut a validateusername");
+  if(userName == "" || userName == undefined || userName == null){
+    setValidName(false);
+    return;
+  }
+    const alphabetAndNumbers = "abcdefghijklmnopqrstuvwxyz0123456789";
+    for(let i = 0; i < userName.length; i++){
+      if(!alphabetAndNumbers.includes(userName[i].toLowerCase())){
+        window.alert("Invalid username! A user name can only include letters and numbers (no space or special characters).");
+        setValidName(false);
+        return;
+      }
+    }
+    setValidName(true);
+    setName(userName);
+}
 
     function register(){
         if(!validateUserInput()){
@@ -92,13 +111,13 @@ export default function Registration(){
              }}>
           <Row className="mb-3">
             <Form.Group as={Col} controlId="formGridName">
-              <Form.Label>Name</Form.Label>
+              <Form.Label>{`Name:` + validName == true ? "OK" : "INVALID!"}</Form.Label>
               <Form.Control
                 type="text"
                 name="Name"
                 value={name}
-                onChange={(e) => setName(e.target.value)}
-                placeholder="Enter Name!"
+                onChange={(e) => validateUserName(e.target.value)}
+                placeholder="Enter user name!"
               />
             </Form.Group>
   
@@ -226,3 +245,4 @@ export function validateEmail(emailAddress){
     //if all above are true: setEmail(email); return true;
     //else: setEmail(null);, window.alert("Invalid e-mail address!"); return false;
 }
+

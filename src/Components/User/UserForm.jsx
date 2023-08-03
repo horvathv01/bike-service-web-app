@@ -17,6 +17,7 @@ function UserForm() {
   const [passwordMatch, setPasswordMatch] = useState(true);
   const [passwordStrength, setPasswordStrength] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const [validName, setValidName] = useState(false);
   const [user, setUser] = useState({
     Name: '',
     Email: '',
@@ -28,7 +29,24 @@ function UserForm() {
     Insurances: [],
   });
 
+
+const validateUserName = (userName) => {
+if(userName.value == "" || userName.value == undefined || userName.value == null){ 
+  return false;
+}
+  const alphabetAndNumbers = "abcdefghijklmnopqrstuvwxyz0123456789";
+  for(let i = 0; i < userName.value.length; i++){
+    if(!alphabetAndNumbers.includes(userName.value[i].toLowerCase())){
+      window.alert("Invalid username! A user name can only include letters and numbers (no space or special characters).");
+      return false;
+    }
+  }
+  return true;
+}
+
   const handleChange = (e) => {
+    setValidName(validateUserName(e.target));
+
     const { name, value } = e.target;
     setUser((prevUser) => ({ ...prevUser, [name]: value }));
   };
@@ -136,7 +154,7 @@ function UserForm() {
         <Form onSubmit={handleSubmit}>
           <Row className="mb-3">
             <Form.Group as={Col} controlId="formGridName">
-              <Form.Label>Name</Form.Label>
+              <Form.Label>{"Name: " + (validName == true ? "OK" : "INVALID!")}</Form.Label>
               <Form.Control
                 type="text"
                 name="Name"
