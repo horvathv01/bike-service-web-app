@@ -155,6 +155,7 @@ export default function Registration(){
                 value={introduction}
                 onChange={(e) => setIntroduction(e.target.value)}
                 placeholder="introduction"
+                required="false"
               />
             </Form.Group>
           </Row>
