@@ -15,7 +15,7 @@ export default function Registration(){
     const navigate = useNavigate();
 
     function validateUserInput(){
-        if(name === ""){
+        if(!validName){
             window.alert("Username is required!");
             return false;
         }
@@ -44,23 +44,56 @@ export default function Registration(){
         return true;
     }
 
-    function validateUserName(userName){
-      console.log("fut a validateusername");
-  if(userName == "" || userName == undefined || userName == null){
-    setValidName(false);
-    return;
-  }
-    const alphabetAndNumbers = "abcdefghijklmnopqrstuvwxyz0123456789";
-    for(let i = 0; i < userName.length; i++){
-      if(!alphabetAndNumbers.includes(userName[i].toLowerCase())){
-        window.alert("Invalid username! A user name can only include letters and numbers (no space or special characters).");
+    const validateUserName = (userName) => {
+      if(userName.value == "" || userName.value == undefined || userName.value == null){
+        setName(userName.value);
         setValidName(false);
-        return;
+        return false;
       }
-    }
-    setValidName(true);
-    setName(userName);
-}
+        const alphabetAndNumbers = "abcdefghijklmnopqrstuvwxyz0123456789";
+        for(let i = 0; i < userName.value.length; i++){
+          if(!alphabetAndNumbers.includes(userName.value[i].toLowerCase())){
+            window.alert("Invalid username! A user name can only include letters and numbers (no space or special characters).");
+            setName(userName.value);
+            setValidName(false);
+            return false;
+          }
+        }
+        setValidName(true);
+        setName(userName.value);
+        return true;
+      }
+
+      //----------------------------------------------------------------------------------------------
+    //   try {
+    //     console.log(`User: ${JSON.stringify(user)}`);
+    //     const response = await fetch(`${ServerUrlAndPort().host}://${ServerUrlAndPort().url}:${ServerUrlAndPort().port}/access/register`, {
+    //       method: 'POST',
+    //       headers: {
+    //         'Content-Type': 'application/json',
+    //       },
+    //       body: JSON.stringify(updatedUser),
+  
+    //     });
+  
+    //     if (response.ok) {
+    //       console.log('User saved successfully!');
+    //       navigate('/success', { state: { message: 'User saved successfully!' } });
+    //     } else {
+    //       console.log('Failed to save user.');
+    //       setError('Failed to save user. Please try again!');
+    //       navigate('/error', { state: { message: 'Failed to save user. Please try again!' } });
+    //     }
+    //   } catch (err) {
+    //     console.log('An error occurred:', err);
+    //     setError('An error occurred. Please try again!', { state: { message: { error } } });
+    //     navigate('/error');
+    //   }
+  
+    // };
+
+
+      //----------------------------------------------------------------------------------------------
 
     function register(){
         if(!validateUserInput()){
@@ -96,6 +129,7 @@ export default function Registration(){
               }
             })
             .catch(error => {
+              console.log(error.message);
             });
         }
     
@@ -111,12 +145,12 @@ export default function Registration(){
              }}>
           <Row className="mb-3">
             <Form.Group as={Col} controlId="formGridName">
-              <Form.Label>{`Name:` + validName == true ? "OK" : "INVALID!"}</Form.Label>
+              <Form.Label>{"Name: " + (validName == true ? "OK" : "INVALID!")}</Form.Label>
               <Form.Control
                 type="text"
                 name="Name"
                 value={name}
-                onChange={(e) => validateUserName(e.target.value)}
+                onChange={(e) => validateUserName(e.target)}
                 placeholder="Enter user name!"
               />
             </Form.Group>
