@@ -1,13 +1,14 @@
 
 export default function ServerUrlAndPort(){
+
     const server = {
         host: "https",
-         url: "localhost",
-        //url: "192.168.1.209", // Vili's ip address
+        url: window.location.hostname === "192.168.1.209" ? "192.168.1.209" : "localhost",  
         port: "7237"
     };
+
     return server;
 }
 
-//http: 5136
-//https: 7237
+//server run in http mode: 5136
+//server run in https mode: 7237
