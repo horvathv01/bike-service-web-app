@@ -23,6 +23,7 @@ import './App.css';
 import '@progress/kendo-theme-default/dist/all.css';
 import { useState } from 'react';
 import { UserProvider } from './Components/User/UserProvider';
+import Registration from './Components/User/Registration';
 
 function App() {
   const [defValue, setDefValue] = useState("Choose...");
@@ -33,7 +34,7 @@ function App() {
         <Route path='/' element={<ServiceInfo/>}/>
 
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/registration" element={<UserForm />} />
+        <Route path="/registration" element={<Registration />} />
         <Route path="/news" element={<News />} />
         <Route path="/service" element={<Service defValue={defValue}/>} />
         <Route path="/tours" element={<Tours />} />
