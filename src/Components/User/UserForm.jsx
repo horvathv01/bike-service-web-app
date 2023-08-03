@@ -44,9 +44,14 @@ if(userName.value == "" || userName.value == undefined || userName.value == null
   return true;
 }
 
-  const handleChange = (e) => {
-    setValidName(validateUserName(e.target));
+  const handleUserNameChange = (e) => {
+  setValidName(validateUserName(e.target));
 
+  const { name, value } = e.target;
+  setUser((prevUser) => ({ ...prevUser, [name]: value }));
+  };
+
+  const handleChange = (e) => {
     const { name, value } = e.target;
     setUser((prevUser) => ({ ...prevUser, [name]: value }));
   };
@@ -159,7 +164,7 @@ if(userName.value == "" || userName.value == undefined || userName.value == null
                 type="text"
                 name="Name"
                 value={user.Name}
-                onChange={handleChange}
+                onChange={handleUserNameChange}
                 placeholder="Enter Name!"
                 required
               />
