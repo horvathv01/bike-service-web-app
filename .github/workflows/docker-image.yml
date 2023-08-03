@@ -42,4 +42,4 @@ jobs:
         run: docker push horvathv01/bike-service-project:bike-service-web-app
 
       - name: Run application in Docker container
-        run: docker run -d -p 8080:8080 krisztanzero/bike-service-project:bike-service-web-app
+        run: docker run -d -p 8080:8080 horvathv01/bike-service-project:bike-service-web-app
